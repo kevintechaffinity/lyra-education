@@ -1,0 +1,99 @@
+@mixin font-face($font-family, $url)
+  $font-base: 'https://s3.eu-central-1.amazonaws.com/infinity-platform/icon-fonts/font'
+
+  @font-face
+    font-family: '#{$font-family}'
+    font-style: normal
+    font-weight: normal
+    src: url('#{$font-base}/#{$url}.eot')
+    src: url('#{$font-base}/#{$url}.eot?#iefix') format('embedded-opentype'), url('#{$font-base}/#{$url}.woff') format('woff2'), url('#{$font-base}/#{$url}.woff2') format('woff'), url('#{$font-base}/#{$url}.ttf') format('truetype')
+
+@mixin font-light
+  font-family: 'Poppins', sans-serif
+  font-weight: 300
+
+@mixin font-regular
+  font-family: 'Poppins', sans-serif
+  font-weight: 400
+
+@mixin font-medium
+  font-family: 'Poppins', sans-serif
+  font-weight: 500
+
+@mixin font-bold
+  font-family: 'Poppins', sans-serif
+  font-weight: 700
+
+@mixin box-shadow
+  box-shadow: 0px 7px 14px 0px $neutral-shadow
+
+@mixin fill-parent
+  width: 100%
+
+@mixin size($size)
+  height: $size
+  width: $size
+
+@mixin reset
+  padding: 0
+  margin: 0
+
+@mixin transition
+  transition: all 250ms ease-in-out
+
+@mixin border-radius
+  border-radius: 16px
+
+@mixin border
+  border: 1px solid $neutral-200
+  +border-radius
+
+@mixin text-shadow
+  text-shadow: 0px 4px 8px rgba(0,0,0,0.3)
+
+@mixin button
+  +border
+  +font-bold
+  +transition
+  align-items: center
+  background-color: $white
+  color: inherit
+  cursor: pointer
+  display: flex
+  font-size: 10px
+  height: 30px
+  justify-content: center
+  text-align: center
+  text-transform: uppercase
+  width: 100px
+
+  @include respond-to('medium')
+    width: 170px
+    height: 54px
+    font-size: inherit
+
+@mixin ghost
+  +button
+  cursor: pointer
+  border-color: $primary
+  color: $primary
+
+  &:hover,
+  &:focus
+    +box-shadow
+    transition-duration: .7s
+    transition-timing-function: ease
+
+@mixin pull-center
+  margin-left: auto
+  margin-right: auto
+
+@mixin respond-to($breakpoint)
+  @if map-has-key($breakpoints, $breakpoint)
+    @media (min-width: map-get($breakpoints, $breakpoint))
+      @content
+
+@mixin respond-to-below($breakpoint)
+  @if map-has-key($breakpoints, $breakpoint)
+    @media (max-width: map-get($breakpoints, $breakpoint) - 1)
+      @content

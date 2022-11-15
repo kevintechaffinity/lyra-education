@@ -1,0 +1,42 @@
+@keyframes wiggle
+  0%
+    transform: rotate(0deg)
+
+  80%
+    transform: rotate(0deg)
+
+  85%
+    transform: rotate(5deg)
+
+  95%
+    transform: rotate(-5deg)
+
+  100%
+    transform: rotate(0deg)
+
+@keyframes wiggle-featured
+  0%
+    transform: rotate(0deg) scale(1)
+
+  25%
+    transform: rotate(15deg) scale(1.2)
+
+  50%
+    transform: rotate(0deg) scale(1.2)
+
+  75%
+    transform: rotate(-15deg) scale(1.2)
+
+  100%
+    transform: rotate(0deg) scale(1)
+
+@keyframes blinking-cursor
+  0%
+    opacity: 0
+  50%
+    opacity: 1
+  100%
+    opacity: 0
+
+.react-rotating-text-cursor
+  animation: blinking-cursor 0.8s cubic-bezier(0.68, 0.01, 0.01, 0.99) 0s infinite

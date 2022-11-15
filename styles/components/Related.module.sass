@@ -1,0 +1,110 @@
+@import '../config'
+@import '../mixins'
+
+@keyframes slideDown
+  0%
+    transform: translateY(-200%)
+  100%
+    transform: translateY(0%)
+
+.related
+  box-shadow: 0px -9px 9px 5px rgba(0,0,0, 0.2)
+  text-decoration: none
+  background-color: $white
+  border-radius: $default-radius
+  margin: 16px
+  padding: 16px
+  width: 480px
+  display: flex
+  border-radius: $default-radius
+  overflow: hidden
+  flex-direction: column
+  transform: translateY(-200%)
+
+  &__inactive
+    transform: translateY(-200%)
+
+  &__active
+    animation-name: slideDown
+    animation-duration: 1s
+    animation-fill-mode: forwards
+    animation-timing-function: cubic-bezier(.165, .84, .44, 1)
+
+  &__container
+    display: flex
+    flex-wrap: wrap
+    justify-content: center
+
+  &__description
+    padding: 0
+    margin-bottom: $padding-2
+
+  &__banner
+    position: relative
+    margin-bottom: 10px
+
+  &__details
+    min-height: $padding-11
+    padding: 10px
+    position: relative
+
+  &__title
+    +font-medium
+    color: $neutral-700
+    text-transform: uppercase
+    display: block
+    line-height: 1
+    font-size: 11px
+    margin-bottom: $padding-1
+
+    span
+      display: block
+      +font-bold
+      font-size: 27px
+      text-transform: none
+
+  &__image_container
+    border-radius: $default-radius
+    overflow: hidden
+
+  &__image
+    width: 100%
+    background-color: $neutral-100
+    border-radius: $default-radius
+    display: block
+    object-fit: cover
+    object-position: bottom left
+
+  &__button
+    margin-left: auto
+    margin-right: auto
+
+  &__close
+    +font-bold
+    color: $primary
+    cursor: pointer
+    display: inline-block
+    margin-left: auto
+    margin-right: auto
+    margin-top: 20px
+    text-align: center
+    text-transform: uppercase
+    width: 100%
+
+@include respond-to('small')
+
+  .related
+    margin: 100px
+    padding: 24px
+
+    &__title
+      margin-bottom: $padding-2
+      font-size: 13px
+
+    &__description
+      font-size: 14px
+      margin-bottom: $padding-2
+
+    &__details
+      min-height: $padding-14
+      padding: 10px

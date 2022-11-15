@@ -1,0 +1,54 @@
+blockquote
+  margin-bottom: $padding-2
+  margin-top: $padding-2
+  margin-left: $padding-2
+  margin-right: $padding-2
+  display: block
+  margin-left: auto
+  margin-right: auto
+  max-width: 650px
+  position: relative
+
+  img
+    width: 38px
+    position: absolute
+    top: -10px
+    left: -10px
+
+    & + br
+      display: none
+
+  p
+    +font-light
+    background-color: $blue-100
+    border-radius: 16px
+    margin-bottom: $padding-2
+    padding: $padding-2 $padding-2 $padding-2 $padding-2
+
+    b, strong
+      color: $neutral-600 !important
+      text-transform: uppercase
+
+    br
+      margin-bottom: 10px
+
+@include respond-to('medium')
+
+  blockquote
+    margin-bottom: $padding-5
+    margin-top: $padding-5
+
+    img
+      width: 55px
+      position: absolute
+      top: -12px
+      left: -12px
+
+      & + br
+        display: none
+
+    p
+      border-radius: 16px
+      font-size: 16px
+      margin-bottom: 25px
+      padding: $padding-4 $padding-4 $padding-4 $padding-4

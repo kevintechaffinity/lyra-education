@@ -1,0 +1,59 @@
+@import '../config'
+@import '../mixins'
+
+.footer
+  align-items: center
+  background-color: $neutral-900
+  color: $white
+  display: flex
+  justify-content: center
+  padding: $padding-2 0
+  margin-top: $padding-3
+
+  a
+    display: flex
+    justify-content: center
+    align-items: center
+    gap: 4px
+    color: white
+
+    i
+      font-size: 10px
+      margin-left: 3px
+
+  &__column
+    +fill-parent
+    display: flex
+    flex-direction: column
+
+  &__container
+    +fill-parent
+    text-align: center
+    max-width: 960px
+    box-sizing: border-box
+
+  &__copy
+    flex: 1
+    margin-top: $padding-2
+    font-size: 10px
+
+  &__title
+    +font-bold
+    text-transform: uppercase
+    margin-bottom: $padding-2
+    font-size: 14px
+
+@include respond-to('medium')
+
+  .footer
+    margin-top: $padding-10
+    padding: $padding-4 0
+
+    &__title
+      font-size: 18px
+
+    &__container
+      display: flex
+
+    &__copy
+      font-size: 14px

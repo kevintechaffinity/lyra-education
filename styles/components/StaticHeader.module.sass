@@ -1,0 +1,40 @@
+@import '../config'
+@import '../mixins'
+
+.staticHeader
+  +border
+  +fill-parent
+  background-color: $white
+  color: inherit
+  display: flex
+  margin-bottom: $padding-3
+  padding: $padding-2
+  position: relative
+  margin-top: -40px
+  transition-duration: .35s
+  transition-timing-function: ease
+
+  &__title
+    +font-bold
+    margin-bottom: 0
+    font-size: 18px
+    line-height: 1
+
+  &__description
+    padding-bottom: 0px
+
+  &__column
+    flex: 1
+    display: flex
+    justify-content: center
+    flex-direction: column
+
+@include respond-to('medium')
+
+  .staticHeader
+    padding: $padding-7
+    margin-top: -$padding-11
+    margin-bottom: $padding-6
+
+    &__title
+      font-size: 42px

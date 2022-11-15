@@ -1,0 +1,39 @@
+@import '../config'
+@import '../mixins'
+
+.ghostbutton
+  +border
+  +font-bold
+  +transition
+  font-size: 12px
+  padding: 12px 0
+  text-transform: uppercase
+  color: $neutral-700
+  width: 150px
+  display: flex
+  margin-left: auto
+  margin-right: auto
+  text-align: center
+  justify-content: center
+  outline: none
+  cursor: pointer
+  border-radius: 25px
+
+  &__badge
+    width: 6px
+    height: 6px
+    border-radius: 50%
+    background-color: $primary
+    display: block
+    margin-right: -6px
+    margin-left: 2px
+
+  &:hover
+    background-color: $neutral-100
+
+@include respond-to('medium')
+
+  .ghostbutton
+    padding: 15px 0
+    width: 170px
+    font-size: 14px

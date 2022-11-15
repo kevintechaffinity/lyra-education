@@ -1,0 +1,33 @@
+body
+  +font-regular
+  background-color: $white
+  color: $neutral-600
+  font-size: 14px
+  line-height: 1.5
+  font-weight: 400
+  scroll-behavior: smooth
+  -webkit-font-smoothing: antialiased
+  -moz-osx-font-smoothing: grayscale
+
+  *, ::before, ::after
+    box-sizing: border-box
+
+  *
+    min-height: 0
+    min-width: 0
+
+  &.join,
+  &.login
+    background-color: $primary
+    header,
+    footer
+      display: none
+
+  &.loading
+    header,
+    footer
+      display: none
+
+@include respond-to('medium')
+  body
+    font-size: 14px

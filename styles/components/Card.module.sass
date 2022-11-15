@@ -1,0 +1,186 @@
+@import '../config'
+@import '../mixins'
+
+@keyframes fadeIn
+  0%
+    opacity: 0
+
+  100%
+    opacity: 1
+
+.card
+  +border
+  +fill-parent
+  display: flex
+  color: inherit
+  margin-bottom: $padding-3
+  padding: $padding-2
+  position: relative
+  transition-duration: .35s
+  transition-timing-function: ease
+  flex-direction: column
+  animation: fadeIn 250ms ease-in forwards
+
+  &__image
+    border-radius: 10px
+    height: 100%
+    width: 100%
+    max-height: 200px
+    object-fit: cover
+
+  &__title
+    +font-bold
+    color: $neutral-700
+
+  &__description
+    p
+      +font-light
+      font-size: 12px
+
+      strong
+        +font-medium
+
+    ol, ul
+      margin-left: $padding-1
+      margin-bottom: 10px
+      margin-top: 5px
+
+      li
+        padding-bottom: 5px
+
+        &:before
+          width: 4px
+          height: 4px
+          background-color: $primary
+          display: block
+          border-radius: 3px
+          position: absolute
+          left: -10px
+          top: 9px
+
+  &__details
+    +font-medium
+    display: flex
+    flex-direction: column
+    margin-bottom: $padding-2
+
+  &__detailsitem
+    display: flex
+    align-items: center
+    gap: 6px
+    margin-right: $padding-1
+
+    span
+      color: $primary
+      margin-right: 5px
+
+  &__status
+    +button
+    display: flex
+    gap: 8px
+    align-items: center
+    position: absolute
+    color: $neutral-700
+    top: -15px
+    right: $padding-2
+
+    svg
+      color: $white
+
+  &__column
+    flex: 1
+    display: flex
+    justify-content: center
+    flex-direction: column
+    margin-top: $padding-2
+
+  &__container
+    +fill-parent
+    display: flex
+    flex-direction: column
+    margin-top: $padding-3
+    min-height: 500px
+
+  &__review
+    cursor: pointer
+    .card__status
+      +ghost
+      cursor: pointer
+      position: absolute
+      right: $padding-2
+
+  &__completed
+    cursor: pointer
+
+    &:hover,
+    &:focus
+      +box-shadow
+      transition-duration: .7s
+      transition-timing-function: ease
+
+  &__current
+    cursor: pointer
+
+    &:hover,
+    &:focus
+      +box-shadow
+      transition-duration: .7s
+      transition-timing-function: ease
+
+    .card__status
+      background-color: $primary
+      border: none
+      color: white
+
+@include respond-to('medium')
+
+  .card
+    margin-bottom: $padding-4
+    padding: $padding-3 $padding-5 $padding-3 $padding-3
+    display: flex
+    flex-direction: row
+
+    &__container
+      margin-top: $padding-4
+      min-height: 600px
+
+    &__image
+      margin-right: $padding-4
+      width: 240px
+      height: 160px
+
+    &__details
+      display: flex
+      flex-direction: row
+      margin-bottom: $padding-1
+
+    &__column
+      margin-top: 0
+
+    &__status
+      top: -27px
+      right: $padding-2
+
+    &__description
+      p
+        font-size: 14px
+        padding-bottom: 5px
+
+      ol, ul
+        margin-left: $padding-1
+        margin-bottom: 10px
+        margin-top: 5px
+
+        li
+          font-size: 14px
+          padding-bottom: 1px
+
+          &:before
+            width: 5px
+            height: 5px
+            background-color: $primary
+            display: block
+            border-radius: 3px
+            position: absolute
+            left: -10px
+            top: 7px

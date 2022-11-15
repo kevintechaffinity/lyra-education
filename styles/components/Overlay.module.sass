@@ -1,0 +1,34 @@
+@keyframes fadeIn
+  0%
+    opacity: 0
+  100%
+    opacity: 1
+
+@keyframes fadeOut
+  0%
+    opacity: 1
+
+  100%
+    opacity: 0
+
+.overlay
+  width: 100%
+  background-color: rgba(0, 0, 0, 0.4)
+  bottom: 0
+  height: 100%
+  left: 0
+  position: fixed
+  right: 0
+  top: 0
+  z-index: 9999999
+
+  &__active
+    display: flex
+    justify-content: center
+    align-items: baseline
+    animation-name: fadeIn
+    animation-duration: 500ms
+    animation-timing-function: cubic-bezier(.165, .84, .44, 1)
+
+  &__inactive
+    display: none

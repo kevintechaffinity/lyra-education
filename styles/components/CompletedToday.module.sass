@@ -1,0 +1,62 @@
+@import '../config'
+@import '../mixins'
+
+@keyframes moveDown
+  0%
+    transform: translate(0, -100px)
+
+  100%
+    transform: translate(0, 0px)
+
+@keyframes fadeIn
+  0%
+    opacity: 0
+
+  100%
+    opacity: 1
+
+.completedToday
+  +border
+  border: none
+  color: $white
+  background-color: $primary
+  box-shadow: 0px -9px 9px 5px rgba(0,0,0, 0.1)
+  padding: $padding-2 $padding-2
+  text-align: center
+  position: relative
+  margin-top: -35px
+  margin-bottom: $padding-2
+  margin-left: $padding-2
+  margin-right: $padding-2
+  display: flex
+  flex-direction: column
+  position: relative
+  z-index: -1
+  animation: moveDown 1s ease-in forwards, fadeIn 250ms ease-in forwards
+
+  &__heading
+    +font-bold
+    text-transform: uppercase
+    font-size: 20px
+    padding-bottom: 5px
+
+  p
+    +font-medium
+    font-size: 12px
+    padding-bottom: 0px
+
+@include respond-to('medium')
+
+  .completedToday
+    font-size: 18px
+    margin-left: $padding-10
+    margin-right: $padding-10
+    margin-top: -$padding-6
+    margin-bottom: $padding-7
+    padding: $padding-4
+
+    &__heading
+      font-size: 27px
+
+    p
+      font-size: 14px

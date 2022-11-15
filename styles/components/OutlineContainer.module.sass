@@ -1,0 +1,112 @@
+@import '../config'
+@import '../mixins'
+
+.outlineContainer
+  margin-top: $padding-1
+  margin-bottom: $padding-6
+
+  &__heading
+    +border
+    +font-bold
+    color: $neutral-700
+    font-size: 10px
+    padding: 5px 5px 5px 12px
+    margin-bottom: 8px
+    display: flex
+
+  &__heading_label
+    flex: 1
+    display: flex
+    align-items: center
+
+  &__page
+    +border
+    +font-light
+    font-size: 9px
+    padding: $padding-1 $padding-1 $padding-1 12px
+    margin-bottom: 8px
+    display: flex
+    align-items: center
+    flex: 1
+    position: relative
+    height: 40px
+    color: inherit
+    margin-left: $padding-1
+
+  &__label
+    flex: 1
+    display: flex
+    align-items: center
+
+    b
+      margin-right: 5px
+
+    a
+      +font-medium
+      color: inherit
+      transition-duration: .35s
+      transition-timing-function: ease
+      border-bottom: 1px solid $primary
+      color: $primary
+      text-decoration: none
+      margin-bottom: 0px
+
+      &:hover
+        transition-duration: .35s
+        transition-timing-function: ease
+        border-bottom: 1px solid $primary
+        color: $primary
+
+  &__button
+    +border
+    +font-bold
+    +transition
+    color: inherit
+    padding: 7px 2px
+    text-transform: uppercase
+    right: $padding-2
+    background-color: white
+    min-width: 68px
+    text-align: center
+    font-size: 8px
+
+  &__active
+    .outlineContainer__button
+      background-color: $primary
+      color: white
+      border: none
+      cursor: pointer
+
+  &__completed
+    .outlineContainer__button
+      +ghost
+      position: relative
+      top: auto
+      right: auto
+
+@include respond-to('medium')
+
+  .outlineContainer
+    margin-top: $padding-2
+    margin-bottom: $padding-10
+
+    &__button
+      padding: 10px 10px
+      min-width: 170px
+      font-size: 14px
+
+    &__heading
+      font-size: 18px
+      padding: $padding-1 $padding-1 $padding-1 $padding-2
+      margin-bottom: $padding-1
+
+    &__page
+      font-size: 14px
+      padding: $padding-1 $padding-2
+      margin-bottom: $padding-1
+      margin-left: $padding-8
+      height: 50px
+
+    &__label
+      b
+        margin-right: 10px

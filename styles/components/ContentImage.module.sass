@@ -1,0 +1,31 @@
+@import '../config'
+@import '../mixins'
+
+.contentImage
+  +border
+  padding: $padding-2
+  width: 100%
+  margin-bottom: $padding-2
+  margin-top: $padding-1
+  display: flex
+
+  &__image
+    +box-shadow
+    border-radius: 10px
+    height: 100%
+    object-fit: cover
+    transition-duration: .7s
+    transition-timing-function: ease
+    width: 100%
+
+    &:hover,
+    &:focus
+      transition-duration: .7s
+      transition-timing-function: ease
+
+@include respond-to('medium')
+
+  .contentImage
+    margin-bottom: $padding-3
+    margin-top: $padding-1
+    padding: $padding-3

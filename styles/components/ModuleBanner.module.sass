@@ -1,0 +1,23 @@
+@import '../config'
+@import '../mixins'
+
+.moduleBanner
+  box-sizing: border-box
+  background-color: $primary
+  position: relative
+  overflow: hidden
+  height: 200px
+
+  &__image
+    width: 100%
+    object-fit: cover
+    position: absolute
+    height: 300px
+
+@include respond-to('medium')
+
+  .moduleBanner
+    height: 300px
+
+    &__image
+      height: 650px

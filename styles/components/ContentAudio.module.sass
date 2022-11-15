@@ -1,0 +1,23 @@
+@import '../config'
+@import '../mixins'
+
+.contentAudio
+  +border
+  padding: $padding-1
+  width: 100%
+  margin-bottom: $padding-2
+  margin-top: $padding-1
+  display: flex
+
+  &__title
+    margin-bottom: $padding-2 !important
+
+@include respond-to('medium')
+
+  .contentAudio
+    margin-bottom: $padding-3
+    margin-top: $padding-2
+    padding: $padding-3
+
+    &__title
+      margin-bottom: $padding-3 !important

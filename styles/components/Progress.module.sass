@@ -1,0 +1,45 @@
+@import '../config'
+@import '../mixins'
+
+.progress
+  +fill-parent
+  display: flex
+  height: 6px
+  margin-bottom: $padding-1
+  margin-top: $padding-1
+  padding-left: $padding-1
+  padding-right: $padding-1
+
+  &__item
+    +border
+    +font-bold
+    flex: 1
+    margin-left: 2px
+    margin-right: 2px
+
+    &:first-child
+      margin-left: 0px
+
+    &:last-child
+      margin-right: 0px
+
+  &__active
+    background-color: $primary
+    border: none
+
+  &__current
+    background-color: $primary
+    opacity: 0.45
+
+@include respond-to('medium')
+
+  .progress
+    height: 15px
+    margin-bottom: $padding-1
+    margin-top: $padding-1
+    padding-left: $padding-3
+    padding-right: $padding-3
+
+    &__item
+      margin-left: 5px
+      margin-right: 5px

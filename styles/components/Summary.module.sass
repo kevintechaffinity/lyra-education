@@ -1,0 +1,108 @@
+@import '../config'
+@import '../mixins'
+
+.summary
+  +border
+  +fill-parent
+  background-color: white
+  box-shadow: 0px -9px 9px 5px rgba(0,0,0, 0.1)
+  margin-top: -15%
+  margin-bottom: $padding-3
+  padding: $padding-2 $padding-2 $padding-2
+  position: relative
+
+  &__section
+    align-content: center
+    display: flex
+    justify-content: space-between
+    margin-bottom: $padding-2
+
+  &__card
+    display: flex
+    flex-direction: column
+    flex: 1
+    line-height: 1
+    text-align: center
+
+  &__card_heading
+    +font-bold
+    color: $primary
+    font-size: 32px
+
+  &__label
+    +font-light
+    font-size: 12px
+
+    ul li:before
+      content: ">"
+      position: absolute
+      background-color: transparent
+      color: $primary
+      font-weight: 700
+      top: 0
+      left: -12px
+
+    ul
+      display: flex
+      align-items: flex-start
+      flex-direction: column
+      justify-content: flex-start
+      margin-top: 5px
+      margin-bottom: 0px
+
+      li
+        width: fit-content
+        padding-bottom: 2px
+
+        &:last-of-type
+          padding-bottom: 0px
+
+@include respond-to('small')
+
+  .summary
+    margin-top: -15%
+    margin-bottom: $padding-3
+    padding: $padding-3 $padding-4
+
+    &__section
+      margin-bottom: $padding-3
+      justify-content: center
+
+    &__label
+      font-size: 18px
+
+    &__card_heading
+      font-size: 42px
+
+    &__card
+      font-size: 14px
+
+@include respond-to('medium')
+
+  .summary
+    margin-top: -15%
+    margin-bottom: $padding-5
+    padding: $padding-5 $padding-8
+
+    &__section
+      margin-bottom: $padding-3
+
+    &__label
+      text-align: center
+      font-size: 22px
+
+      ul li:before
+        left: -16px
+
+      ul
+        align-items: center
+        justify-content: center
+
+      li
+        padding-bottom: 5px
+
+    &__card_heading
+      font-size: 64px
+
+    &__card
+      font-size: 20px

@@ -1,0 +1,136 @@
+form
+  +box-shadow
+  align-content: center
+  align-items: center
+  background-color: white
+  border-radius: $default-radius
+  bottom: 16px
+  box-sizing: border-box
+  display: flex
+  flex-direction: column
+  font-size: 14px
+  left: 16px
+  margin-left: auto
+  margin-right: auto
+  max-width: 480px
+  padding-bottom: $padding-3
+  padding-left: $padding-2
+  padding-right: $padding-2
+  padding-top: $padding-4
+  position: absolute
+  right: 16px
+  text-align: center
+  top: 16px
+  min-height: 512px
+  overflow-y: auto
+
+  svg
+    animation: wiggle 3.5s cubic-bezier(.36,.07,.19,.97) infinite
+
+  .svg__filler
+    width: 95px
+    margin-bottom: 16px
+
+    .fill-primary
+      fill: $primary
+      opacity: 0.5
+
+    .fill-secondary
+      fill: white
+      opacity: 1
+
+  h1
+    font-size: 26px
+
+  em
+    +font-medium
+    padding-bottom: 30px
+
+  p
+    +font-light
+    font-size: 14px
+    padding-bottom: 20px
+    max-width: 320px
+
+    strong,
+    b
+      +font-medium
+
+  a
+    +font-medium
+    border-bottom: 1px solid $primary
+    color: $primary
+
+    &.terms-and-conditions
+      font-size: 12px
+      position: absolute
+      bottom: 20px
+
+  input[type='text'],
+  input[type='tel'],
+  input[type='email'],
+  input[type='date'],
+  input[type='password'],
+  input[type='number'],
+  textarea
+    -moz-appearance: none
+    -webkit-appearance: none
+    +fill-parent
+    +font-bold
+    appearance: none
+    background-color: $white
+    border-radius: 30px
+    border: 1px solid $neutral-200
+    box-sizing: border-box
+    color: $neutral-600
+    display: block
+    font-size: inherit
+    height: 54px
+    margin-left: auto
+    margin-right: auto
+    max-width: 300px
+    outline: none
+    padding: 12px $padding-2
+    text-align: center
+    text-transform: uppercase
+    transition: border 350ms ease-in-out, color 350ms ease-in-out, border-color 350ms ease-in-out
+
+    &.error
+      border: solid 2px $primary
+
+      &::placeholder
+        color: $primary
+
+    &::placeholder
+      +font-bold
+      color: $neutral-600
+      opacity: 1
+
+  input[type='submit']
+    +font-bold
+    +fill-parent
+    appearance: none
+    -webkit-appearance: none
+    background-color: $primary
+    border: 1ps solid $primary
+    border-radius: 30px
+    color: $white
+    cursor: pointer
+    display: inline-block
+    font-size: inherit
+    height: 54px
+    line-height: 54px
+    margin-bottom: $padding-3
+    margin-top: $padding-1
+    max-width: 300px
+    outline: 0
+    padding-left: $padding-6
+    padding-right: $padding-6
+    text-decoration: none
+    text-transform: uppercase
+    transition: background-color 350ms ease-in-out, border-color 350ms ease-in-out, color 350ms ease-in-out
+
+    &:hover,
+    &:focus
+      background-color: var(--secondary-color)
+      border-color: var(--secondary-color)

@@ -1,0 +1,71 @@
+@import '../config'
+@import '../mixins'
+
+.steps
+  display: flex
+  margin-top: $padding-1
+  padding-left: $padding-1
+  padding-right: $padding-1
+  outline: none
+
+  &__item
+    +border
+    +font-bold
+    display: flex
+    flex: 1
+    font-size: 14px
+    padding: 14px 10px
+    text-transform: uppercase
+    align-items: center
+    cursor: pointer
+    color: inherit
+
+    &:hover,
+    &:focus
+      +box-shadow
+      transition-duration: .7s
+      transition-timing-function: ease
+
+  &__right
+    text-align: right
+
+    &:before
+      text-align: right
+
+  &__next
+    justify-content: end
+    margin-left: 4px
+
+  &__previous
+    margin-right: 4px
+
+  &__label
+    +font-bold
+    font-size: 7px
+    cursor: pointer
+
+  &__content
+    display: flex
+    flex-direction: column
+    line-height: 1
+    flex: 1
+
+@include respond-to('medium')
+
+  .steps
+    margin-top: $padding-2
+    padding-left: $padding-3
+    padding-right: $padding-3
+
+    &__item
+      font-size: 27px
+      padding: $padding-2
+
+    &__next
+      margin-left: $padding-1
+
+    &__previous
+      margin-right: $padding-1
+
+    &__label
+      font-size: 12px

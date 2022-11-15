@@ -1,0 +1,106 @@
+@import '../config'
+@import '../mixins'
+
+.moduleHeader
+  +border
+  +fill-parent
+  background-color: $white
+  color: inherit
+  display: flex
+  margin-bottom: $padding-3
+  padding: $padding-2 $padding-2 25px $padding-2
+  position: relative
+  margin-top: -150px
+  transition-duration: .35s
+  transition-timing-function: ease
+  min-height: 170px
+  flex-direction: column
+
+  &__image
+    border-radius: $padding-1
+    height: 100%
+    width: 100%
+    // max-height: 200px
+    margin-bottom: $padding-2
+    object-fit: cover
+
+  &__title
+    +font-bold
+
+  &__description
+    font-size: 14px
+    +font-light
+
+  &__details
+    +font-medium
+    display: flex
+    flex-direction: column
+    flex-flow: wrap
+
+  &__detailsitem
+    display: flex
+    align-items: center
+    gap: 6px
+    margin-right: $padding-2
+    padding-bottom: 3px
+
+    a
+      +font-medium
+      color: inherit
+      border-bottom: 1px solid $primary
+      color: $primary
+
+    i
+      color: $primary
+      margin-right: 5px
+
+  &__left
+    font-size: 10px
+
+  &__status
+    +button
+    position: absolute
+    bottom: -15px
+    right: $padding-2
+
+  &__column
+    flex: 1
+    display: flex
+    justify-content: center
+    flex-direction: column
+
+  &__container
+    +fill-parent
+    display: flex
+    flex-direction: column
+    margin-top: 40px
+
+  &__current
+    +button
+    position: absolute
+    right: $padding-2
+    background-color: $primary
+    border: none
+    color: white
+
+  &__review
+    +ghost
+    position: absolute
+    right: $padding-2
+
+@include respond-to('medium')
+
+  .moduleHeader
+    margin-top: -$padding-11
+    flex-direction: row
+    margin-bottom: $padding-4
+    padding: $padding-3
+
+    &__image
+      margin-right: $padding-4
+      width: 240px
+      height: 160px
+      margin-bottom: 0
+
+    &__details
+      flex-direction: row

@@ -1,0 +1,42 @@
+@import '../config'
+@import '../mixins'
+
+.signupButton
+  +font-bold
+  +transition
+  background-color: $primary
+  border: none
+  color: inherit
+  display: inline-block
+  font-size: 14px
+  padding: 15px 20px
+  text-align: left
+  text-transform: uppercase
+  line-height: 0.85
+  text-align: left
+  min-width: 200px
+  border-radius: 45px
+
+  &__title
+    display: block
+    text-shadow: 0px 1px 4px rgba(0,0,0,0.3)
+
+  &__description
+    font-size: 10px
+    text-shadow: 0px 1px 4px rgba(0,0,0,0.3)
+    line-height: 1
+    font-weight: 500
+
+  &:hover,
+  &:focus
+    box-shadow: 0px 4px 8px rgba(0,0,0,0.6)
+
+@include respond-to('medium')
+
+  .signupButton
+    font-size: 20px
+    padding: 25px 35px
+    min-width: 260px
+
+    &__description
+      +font-medium

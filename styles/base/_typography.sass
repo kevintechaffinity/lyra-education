@@ -1,0 +1,101 @@
+h1, h2, h3, h4, h5, h6
+  color: $neutral-700
+
+h1
+  +font-bold
+  font-size: 28px
+  margin-bottom: $padding-1
+  line-height: 1.2
+
+  @include respond-to('small')
+    font-size: 32px
+
+h2
+  +font-medium
+  font-size: 15px
+  margin-bottom: $padding-1
+
+h3
+  +font-medium
+  font-size: 18px
+  margin-bottom: $padding-1
+
+p
+  +font-light
+  padding-bottom: $padding-1
+
+a
+  text-decoration: none
+
+b,
+strong
+  +font-bold
+
+ul, ol
+  margin-left: $padding-1
+  margin-bottom: $padding-1
+
+  li
+    +font-light
+    padding-bottom: $padding-1
+
+ol
+  list-style: decimal
+
+ul
+  list-style: none
+  margin-left: $padding-1
+
+  li
+    position: relative
+
+    &:before
+      content: ''
+      width: 5px
+      height: 5px
+      background-color: $primary
+      display: block
+      border-radius: 3px
+      position: absolute
+      left: -10px
+      top: 8px
+
+@include respond-to('medium')
+
+  h1
+    font-size: 60px
+    margin-bottom: $padding-1
+
+  h2
+    font-size: 27px
+    margin-bottom: $padding-1
+
+  h3
+    font-size: 27px
+    margin-bottom: $padding-1
+
+  p
+    padding-bottom: $padding-2
+    font-size: 18px
+
+  ul, ol
+    margin-left: $padding-2
+    margin-bottom: $padding-2
+
+    li
+      +font-light
+      font-size: 18px
+      padding-bottom: $padding-1
+
+  ul
+    li
+      &:before
+        content: ''
+        width: 8px
+        height: 8px
+        background-color: $primary
+        display: block
+        border-radius: 5px
+        position: absolute
+        left: -20px
+        top: 9px

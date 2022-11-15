@@ -1,0 +1,20 @@
+@import '../config'
+@import '../mixins'
+
+.contentContainerSummary
+  +border
+  display: block
+  padding: $padding-2 $padding-2 $padding-1
+  margin-top: $padding-1
+  margin-bottom: $padding-2
+  border-color: $primary
+
+  h1, h2
+    color: $primary
+
+@include respond-to('medium')
+
+  .contentContainerSummary
+    padding: $padding-3 $padding-3 $padding-1
+    margin-top: $padding-2
+    margin-bottom: $padding-4
