@@ -1,9 +1,10 @@
 import React from 'react';
 import Router from 'next/router';
+import PropTypes from 'prop-types';
 
 import styles from '../styles/components/GhostButton.module.sass';
 
-export default function GhostButton({ onClick, href, children, badge }) {
+export default function GhostButton({ onClick, href, children }) {
   const handleClick = (event) => {
     event.preventDefault();
 
@@ -25,7 +26,17 @@ export default function GhostButton({ onClick, href, children, badge }) {
   return (
     <div onClick={handleClick} className={styles.ghostbutton}>
       {children}
-      {badge && <span className={styles.ghostbutton__badge} />}
     </div>
   );
 }
+
+GhostButton.defaultProps = {
+  onClick: null,
+  href: null,
+};
+
+GhostButton.propTypes = {
+  onClick: PropTypes.func,
+  href: PropTypes.string,
+  children: PropTypes.node.isRequired,
+};

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import styles from '../../styles/components/StaticHeader.module.sass';
 import ScrollFade from '../ScrollFade';
@@ -18,3 +19,8 @@ export default function StaticHeader({ title, children }) {
     </ScrollFade>
   );
 }
+
+StaticHeader.propTypes = {
+  title: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
+};

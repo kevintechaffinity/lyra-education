@@ -1,7 +1,9 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
+import { getCookie } from 'cookies-next';
 import { useRouter } from 'next/router';
+import PropTypes from 'prop-types';
 
-import ServiceContext from '../context/ServiceContext';
+import useService from '../hooks/useService';
 import styles from '../styles/components/Welcome.module.sass';
 
 import Image from './Image';
@@ -10,8 +12,12 @@ import Overlay from './Overlay';
 export default function WelcomePopup({ hide }) {
   const router = useRouter();
   const [show, setShow] = useState(true);
-  const { loginUrl, loggedIn, assets, primaryColor, callToAction, name, metadata } =
-    useContext(ServiceContext);
+  const { service } = useService();
+  const { metadata, loginUrl, primaryColor, callToAction, assets, name } = service;
+
+  const loggedIn = !!getCookie('token');
+
+  if (!service) return null;
 
   const changeRoute = () => {
     router.push('/', '/', { shallow: true });
@@ -39,7 +45,15 @@ export default function WelcomePopup({ hide }) {
       >
         <div className={styles.welcome__banner}>
           <div className={styles.welcome__image_container}>
-            <Image publicId={assets.banner} className={styles.welcome__image} />
+            <Image
+              width="400px"
+              height="150px"
+              objectPosition="top"
+              layout="responsive"
+              publicId={assets.banner}
+              className={styles.welcome__image}
+              alt={name}
+            />
           </div>
         </div>
         <div className={styles.welcome__details}>
@@ -68,3 +82,7 @@ export default function WelcomePopup({ hide }) {
     </Overlay>
   );
 }
+
+WelcomePopup.propTypes = {
+  hide: PropTypes.func.isRequired,
+};

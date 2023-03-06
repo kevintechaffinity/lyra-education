@@ -1,19 +1,20 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import Link from 'next/link';
 
-import ServiceContext from '../context/ServiceContext';
+import useService from '../hooks/useService';
 import styles from '../styles/components/Logo.module.sass';
 
 import Image from './Image';
 
 export default function Logo() {
-  const { assets } = useContext(ServiceContext);
+  const { service } = useService();
+  const { assets } = service;
+
+  if (!service) return null;
 
   return (
-    <Link href="/">
-      <a className={styles.logo}>
-        <Image publicId={assets.logo} className={styles.logo__image} />
-      </a>
+    <Link href="/" className={styles.logo}>
+      <Image width="128" height="48" objectFit="contain" publicId={assets.logo} alt="Logo" />
     </Link>
   );
 }

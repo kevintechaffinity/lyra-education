@@ -1,0 +1,31 @@
+@import '../config'
+@import '../mixins'
+
+.toast
+
+  &__title
+    display: flex
+    gap: $padding-1
+    align-items: center
+    font-size: 18px
+    font-weight: 900
+    margin-bottom: $padding-1
+    color: $neutral-700
+
+    svg
+      color: $primary
+
+  &__message
+    font-size: 14px
+    color: $neutral-500
+
+  a
+    border-radius: 99px
+    background-color: $primary
+    display: inline-flex
+    gap: $padding-1
+    align-items: center
+    font-weight: 700
+    color: $neutral-700
+    padding: $padding-1 $padding-2
+    margin-top: $padding-2

@@ -1,14 +1,22 @@
 {
   "extends": [
+    "eslint:recommended",
     "plugin:react/recommended",
-    "plugin:@next/next/recommended",
+    "plugin:react-hooks/recommended",
+    "plugin:import/recommended",
+    "plugin:jsx-a11y/recommended",
     "airbnb",
+    "plugin:@next/next/recommended",
+    "next",
+    "next/core-web-vitals",
     "prettier"
   ],
   "plugins": [
     "react",
     "prettier",
-    "simple-import-sort"
+    "import",
+    "simple-import-sort",
+    "jsx-a11y"
   ],
   "env": {
     "browser": true,
@@ -43,7 +51,7 @@
       }
     ],
     "no-nested-ternary": "off",
-    "react/prop-types": "off",
+    "react/prop-types": "error",
     "react/no-array-index-key": "off",
     "react/react-in-jsx-scope": "off",
     "camelcase": "off",

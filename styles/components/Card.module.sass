@@ -1,35 +1,26 @@
 @import '../config'
 @import '../mixins'
 
-@keyframes fadeIn
-  0%
-    opacity: 0
-
-  100%
-    opacity: 1
-
 .card
   +border
-  +fill-parent
   display: flex
   color: inherit
+  background-color: $white
   margin-bottom: $padding-3
   padding: $padding-2
   position: relative
   transition-duration: .35s
   transition-timing-function: ease
   flex-direction: column
+  width: 100%
   animation: fadeIn 250ms ease-in forwards
 
   &__image
     border-radius: 10px
-    height: 100%
-    width: 100%
-    max-height: 200px
-    object-fit: cover
 
   &__title
     +font-bold
+    margin-bottom: 0px
     color: $neutral-700
 
   &__description
@@ -62,7 +53,7 @@
     +font-medium
     display: flex
     flex-direction: column
-    margin-bottom: $padding-2
+    margin-bottom: $padding-3
 
   &__detailsitem
     display: flex
@@ -85,7 +76,7 @@
     right: $padding-2
 
     svg
-      color: $white
+      color: $black
 
   &__column
     flex: 1
@@ -130,7 +121,10 @@
     .card__status
       background-color: $primary
       border: none
-      color: white
+      color: $neutral-800
+
+      svg
+        color: $neutral-800
 
 @include respond-to('medium')
 
@@ -138,21 +132,17 @@
     margin-bottom: $padding-4
     padding: $padding-3 $padding-5 $padding-3 $padding-3
     display: flex
+    gap: 32px
     flex-direction: row
 
     &__container
       margin-top: $padding-4
       min-height: 600px
 
-    &__image
-      margin-right: $padding-4
-      width: 240px
-      height: 160px
-
     &__details
       display: flex
       flex-direction: row
-      margin-bottom: $padding-1
+      margin-bottom: $padding-2
 
     &__column
       margin-top: 0

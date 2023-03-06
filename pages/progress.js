@@ -1,38 +1,37 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { Remarkable } from 'remarkable';
 
 import CardContainer from '../components/CardContainer';
 import Grid from '../components/Grid';
 import StaticHeader from '../components/headers/StaticHeader';
-import StaticBanner from '../components/StaticBanner';
-import { getModules } from '../services/http/Content';
+import Hero from '../components/Hero';
+import useModules from '../hooks/useModules';
+import useService from '../hooks/useService';
 
-export default class Progress extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      modules: [],
-    };
-  }
+export default function Progress() {
+  const { modules } = useModules();
+  const { service } = useService();
 
-  componentDidMount() {
-    getModules().then((data) => {
-      this.setState({ modules: data.filter((o) => ['COMPLETED', 'ACTIVE'].includes(o.status)) });
-    });
-  }
+  const { assets } = service;
 
-  render() {
-    const { modules } = this.state;
+  if (!modules) return null;
+  if (!service) return null;
 
-    return (
-      <>
-        <StaticBanner />
-        <Grid>
-          <StaticHeader title="Your Progress">
-            View or review your completed course material below:
-          </StaticHeader>
-          <CardContainer items={modules} />
-        </Grid>
-      </>
-    );
-  }
+  const md = new Remarkable();
+  md.set({
+    html: true,
+    breaks: true,
+  });
+
+  return (
+    <>
+      {assets && <Hero banner={assets.banner} />}
+      <Grid>
+        <StaticHeader title="Your Progress">
+          View or review your completed course material below:
+        </StaticHeader>
+        <CardContainer items={modules.filter((o) => ['COMPLETED', 'ACTIVE'].includes(o.status))} />
+      </Grid>
+    </>
+  );
 }

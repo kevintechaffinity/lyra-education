@@ -6,22 +6,7 @@ export default class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
-          <link
-            href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-            rel="stylesheet"
-          />
-          <link
-            href="https://unpkg.com/cloudinary-video-player/dist/cld-video-player.min.css"
-            rel="stylesheet"
-          />
-          <script
-            src="https://unpkg.com/cloudinary-core/cloudinary-core-shrinkwrap.min.js"
-            type="text/javascript"
-          />
-          <script
-            src="https://unpkg.com/cloudinary-video-player/dist/cld-video-player.min.js"
-            type="text/javascript"
-          />
+          <link rel="preconnect" href="https://res.cloudinary.com" />
         </Head>
         <body>
           <Main />

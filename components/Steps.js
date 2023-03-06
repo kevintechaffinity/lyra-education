@@ -1,8 +1,8 @@
 import React from 'react';
+import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
+import PropTypes from 'prop-types';
 
 import styles from '../styles/components/Steps.module.sass';
-
-import Icon from './Icon';
 
 export default function Steps({ page }) {
   const { progress, moduleSlug, chapter } = page;
@@ -15,7 +15,11 @@ export default function Steps({ page }) {
         className={`${styles.steps__item} ${styles.steps__previous}`}
         href={`/module/${moduleSlug}/${previous || ''}`}
       >
-        {previous && <Icon name="FaAngleLeft" />}
+        {previous && (
+          <i className="icon">
+            <FaAngleLeft />
+          </i>
+        )}
         <div className={styles.steps__content}>
           {previous ? 'Back' : 'Overview'}
           <label className={styles.steps__label}>{previousName || chapter}</label>
@@ -29,8 +33,27 @@ export default function Steps({ page }) {
           {next ? 'Next' : 'Completed'}
           <label className={styles.steps__label}>{nextName || chapter}</label>
         </div>
-        {next && <Icon name="FaAngleRight" />}
+        {next && (
+          <i className="icon">
+            <FaAngleRight />
+          </i>
+        )}
       </a>
     </div>
   );
 }
+
+Steps.propTypes = {
+  page: PropTypes.shape({
+    moduleSlug: PropTypes.string,
+    chapter: PropTypes.string,
+    progress: PropTypes.arrayOf(
+      PropTypes.shape({
+        nextName: PropTypes.string,
+        next: PropTypes.string,
+        current: PropTypes.bool,
+        completed: PropTypes.bool,
+      }),
+    ),
+  }).isRequired,
+};

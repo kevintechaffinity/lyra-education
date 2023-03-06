@@ -1,41 +1,96 @@
-import React, { useContext } from 'react';
+import React from 'react';
+import {
+  FaArrowRight,
+  FaCheck,
+  FaEye,
+  FaHourglassHalf,
+  FaLock,
+  FaRegCalendarAlt,
+  FaRegClock,
+  FaRegUserCircle,
+} from 'react-icons/fa';
+import { DateTime } from 'luxon';
 import Router from 'next/router';
 import pluralize from 'pluralize';
+import PropTypes from 'prop-types';
 import { Remarkable } from 'remarkable';
 
-import ServiceContext from '../context/ServiceContext';
+import useCompleted from '../hooks/useCompleted';
 import styles from '../styles/components/Card.module.sass';
 
-import Icon from './Icon';
 import Image from './Image';
 import ScrollFade from './ScrollFade';
 
-const { DateTime } = require('luxon');
-
 export default function Card({ course }) {
-  const { completedToday } = useContext(ServiceContext);
+  const { completionStatus } = useCompleted();
   const { slug, name, duration, author, updatedAt, caption, status, assets } = course;
 
   const button = () => {
     if (duration === 0) {
-      return 'Coming soon';
+      return (
+        <>
+          <span>Coming Soon</span>
+          <i className="icon">
+            <FaHourglassHalf />
+          </i>
+        </>
+      );
     }
-    if (completedToday && status === 'ACTIVE') return 'Review';
-    if (status === 'READY') return 'Start now';
+    if (completionStatus?.completedToday && status === 'ACTIVE') {
+      return (
+        <>
+          <span>Review</span>
+          <i className="icon">
+            <FaEye />
+          </i>
+        </>
+      );
+    }
+    if (status === 'READY') {
+      return (
+        <>
+          <span>Start Now</span>
+          <i className="icon">
+            <FaArrowRight />
+          </i>
+        </>
+      );
+    }
     if (status === 'ACTIVE') {
-      return 'Continue';
+      return (
+        <>
+          <span>Continue</span>
+          <i className="icon">
+            <FaArrowRight />
+          </i>
+        </>
+      );
     }
     if (status === 'PENDING') {
-      return 'Module';
+      return (
+        <>
+          <span>Module</span>
+          <i className="icon">
+            <FaLock />
+          </i>
+        </>
+      );
     }
     if (status === 'COMPLETED') {
-      return 'Completed';
+      return (
+        <>
+          <span>Completed</span>
+          <i className="icon">
+            <FaCheck />
+          </i>
+        </>
+      );
     }
-    return '';
+    return null;
   };
 
   const className = () => {
-    if (completedToday && status === 'ACTIVE') {
+    if (completionStatus?.completedToday && status === 'ACTIVE') {
       return styles.card__review;
     }
     if (status === 'READY') {
@@ -50,7 +105,7 @@ export default function Card({ course }) {
     if (status === 'COMPLETED') {
       return styles.card__completed;
     }
-    return '';
+    return null;
   };
 
   const handleClick = () => {
@@ -73,28 +128,38 @@ export default function Card({ course }) {
   });
 
   return (
-    <ScrollFade threshold={0.1}>
+    <ScrollFade>
       <div onClick={() => handleClick()} className={`${styles.card} ${className()}`}>
-        <span className={styles.card__status}>
-          <span>{button()}</span>
-          <Icon name="FaArrowRight" />
-        </span>
-        <Image publicId={assets.thumbnail} className={styles.card__image} />
+        <span className={styles.card__status}>{button()}</span>
+        <Image
+          width={240}
+          height={200}
+          objectFit="cover"
+          publicId={assets.thumbnail}
+          className={styles.card__image}
+          alt={name}
+        />
         <div className={styles.card__column}>
           <h3 className={styles.card__title}>{name}</h3>
           <span className={styles.card__details}>
             {duration !== 0 && (
               <span className={styles.card__detailsitem}>
-                <Icon name="FaInbox" />
+                <i className="icon">
+                  <FaRegClock />
+                </i>
                 {durationFormatted()}
               </span>
             )}
             <span className={styles.card__detailsitem}>
-              <Icon name="FaUserCircle" />
+              <i className="icon">
+                <FaRegUserCircle />
+              </i>
               {`by ${author}`}
             </span>
             <span className={styles.card__detailsitem}>
-              <Icon name="FaRegCalendarAlt" />
+              <i className="icon">
+                <FaRegCalendarAlt />
+              </i>
               {dateFormatted()}
             </span>
           </span>
@@ -107,3 +172,18 @@ export default function Card({ course }) {
     </ScrollFade>
   );
 }
+Card.propTypes = {
+  course: PropTypes.shape({
+    assets: PropTypes.shape({
+      thumbnail: PropTypes.string,
+    }).isRequired,
+    status: PropTypes.string,
+    id: PropTypes.number,
+    name: PropTypes.string,
+    slug: PropTypes.string,
+    caption: PropTypes.string,
+    author: PropTypes.string,
+    updatedAt: PropTypes.string,
+    duration: PropTypes.number,
+  }).isRequired,
+};

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import styles from '../styles/components/Progress.module.sass';
 
@@ -18,3 +19,12 @@ export default function Progress({ progress }) {
     </div>
   );
 }
+
+Progress.propTypes = {
+  progress: PropTypes.arrayOf(
+    PropTypes.shape({
+      current: PropTypes.bool,
+      completed: PropTypes.bool,
+    }),
+  ).isRequired,
+};

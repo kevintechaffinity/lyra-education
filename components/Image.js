@@ -1,15 +1,26 @@
 import React from 'react';
-import { Image as ImageCloudinary } from 'cloudinary-react';
+import NextImage from 'next/legacy/image';
+import PropTypes from 'prop-types';
 
-export default function Image({ publicId, className }) {
+import { BuildImageUrl, BuildPlaceholderUrl } from '../utilities/cloudinary';
+
+export default function Image({ publicId, className, ...props }) {
   return (
-    <ImageCloudinary
-      cloudName="dzabdxdw5"
-      publicId={publicId}
+    <NextImage
+      placeholder="blur"
+      blurDataURL={BuildPlaceholderUrl(publicId)}
+      src={BuildImageUrl(publicId)}
       className={className}
-      secure
-      quality="auto"
-      fetch_format="auto"
+      {...props}
     />
   );
 }
+
+Image.defaultProps = {
+  className: null,
+};
+
+Image.propTypes = {
+  publicId: PropTypes.string.isRequired,
+  className: PropTypes.string,
+};

@@ -1,41 +1,47 @@
-import React, { Component } from 'react';
-import Router from 'next/router';
+import React, { useEffect } from 'react';
+import { useRouter } from 'next/router';
 
 import Loading from '../components/Loading';
+import useCompleted from '../hooks/useCompleted';
+import useModules from '../hooks/useModules';
+import useRelated from '../hooks/useRelated';
+import useService from '../hooks/useService';
+import useSubscribed from '../hooks/useSubscribed';
+import useTermsAndConditions from '../hooks/useTermsAndConditions';
+import { autologin } from '../services/User';
 
-export default class AutoLogin extends Component {
-  constructor(props) {
-    super(props);
-    this.waitForAppMounted = this.waitForAppMounted.bind(this);
-  }
+export default function AutoLogin() {
+  const router = useRouter();
+  const { mutateService } = useService();
+  const { mutateCompletionStatus } = useCompleted();
+  const { mutateModules } = useModules();
+  const { mutateRelated } = useRelated();
+  const { mutateSubscriptionStatus } = useSubscribed();
+  const { mutatePage } = useTermsAndConditions();
 
-  componentDidMount() {
-    window.document.body.classList.add('loading');
-    this.waitForAppMounted().then(() => {
-      const { t, welcome } = Router.query;
-      const { login } = this.props;
-      login(t, welcome);
-    });
-  }
+  useEffect(() => {
+    const { welcome, t } = router.query;
 
-  componentWillUnmount() {
-    window.document.body.classList.remove('loading');
-  }
+    autologin(t);
+    mutateService();
+    mutateCompletionStatus();
+    mutateModules();
+    mutateRelated();
+    mutateSubscriptionStatus();
+    mutatePage();
 
-  waitForAppMounted() {
-    return new Promise((resolve) => {
-      const loop = setInterval(() => {
-        const { appMounted } = this.props;
-        if (!appMounted) return;
-        clearInterval(loop);
-        resolve();
-      }, 10);
-    });
-  }
+    router.push(welcome ? '/?welcome=true' : '/');
+  }, [
+    router,
+    mutateService,
+    mutateCompletionStatus,
+    mutateModules,
+    mutateRelated,
+    mutateSubscriptionStatus,
+    mutatePage,
+  ]);
 
-  render() {
-    return <Loading page />;
-  }
+  return <Loading />;
 }
 
 AutoLogin.getInitialProps = async (context) => ({ t: context.query.t });

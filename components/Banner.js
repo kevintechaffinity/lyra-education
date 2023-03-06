@@ -1,54 +1,55 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { FaArrowRight } from 'react-icons/fa';
 import Router from 'next/router';
 
-import ServiceContext from '../context/ServiceContext';
-import { getModules } from '../services/http/Content';
+import useCompleted from '../hooks/useCompleted';
+import useModules from '../hooks/useModules';
+import useService from '../hooks/useService';
+import useSubscribed from '../hooks/useSubscribed';
 import styles from '../styles/components/Banner.module.sass';
 
 import Grid from './Grid';
-import Icon from './Icon';
 import Image from './Image';
 import SignupButton from './SignupButton';
 
 export default function Banner() {
   const [active, setActive] = useState(null);
   const [ready, setReady] = useState(null);
+  const { modules } = useModules();
+  const { completionStatus } = useCompleted();
+  const { service } = useService();
+  const { subscriptionStatus } = useSubscribed();
 
-  const {
-    assets,
-    subscribed,
-    callToAction,
-    heading,
-    description,
-    fee,
-    campaign,
-    metadata,
-    completedToday,
-  } = useContext(ServiceContext);
+  const { assets, metadata, callToAction, campaign } = service;
 
   useEffect(() => {
-    getModules().then((data) => {
-      const activeModule = data.find((item) => item.status === 'ACTIVE');
-      const readyModule = data.find((item) => item.status === 'READY');
+    if (!modules) return;
 
-      setActive(activeModule);
-      setReady(readyModule);
-    });
-  }, []);
+    const activeModule = modules.find((item) => item.status === 'ACTIVE');
+    const readyModule = modules.find((item) => item.status === 'READY');
+
+    setActive(activeModule);
+    setReady(readyModule);
+  }, [modules]);
+
+  if (!completionStatus) return null;
+  if (!service) return null;
 
   const handleClick = (state) => {
     Router.push('/module/[module]', state.slug);
   };
 
   const button = () => {
-    if (!subscribed && metadata.subscribe)
-      return <SignupButton label={callToAction} prize={fee} campaign={campaign} />;
+    if (!subscriptionStatus.subscribed.hasAccess && metadata.subscribe)
+      return <SignupButton label={callToAction} campaign={campaign} />;
 
-    if (completedToday)
+    if (completionStatus?.completedToday)
       return (
         <button className={styles.banner__status} onClick={() => handleClick(active)} type="button">
-          <span>{completedToday && 'Review Course'}</span>
-          <Icon name="FaArrowRight" />
+          <span>Review Course</span>
+          <i className="icon">
+            <FaArrowRight />
+          </i>
         </button>
       );
 
@@ -56,7 +57,9 @@ export default function Banner() {
       return (
         <button className={styles.banner__status} onClick={() => handleClick(active)} type="button">
           <span>Continue Course</span>
-          <Icon name="FaArrowRight" />
+          <i className="icon">
+            <FaArrowRight />
+          </i>
         </button>
       );
 
@@ -64,7 +67,9 @@ export default function Banner() {
       return (
         <button className={styles.banner__status} onClick={() => handleClick(ready)} type="button">
           <span>Start Course</span>
-          <Icon name="FaArrowRight" />
+          <i className="icon">
+            <FaArrowRight />
+          </i>
         </button>
       );
 
@@ -73,11 +78,19 @@ export default function Banner() {
 
   return (
     <div className={styles.banner}>
-      <Image publicId={assets.banner} className={styles.banner__image} />
+      <Image
+        layout="fill"
+        objectFit="cover"
+        objectPosition="top"
+        publicId={assets.banner}
+        priority
+        className={styles.banner__image}
+        alt={metadata.heading}
+      />
       <Grid>
         <div className={styles.banner__content}>
-          <h1 dangerouslySetInnerHTML={{ __html: heading }} />
-          <h2 dangerouslySetInnerHTML={{ __html: description }} />
+          <h1 dangerouslySetInnerHTML={{ __html: metadata.heading }} />
+          <h2 dangerouslySetInnerHTML={{ __html: metadata.description }} />
           {button()}
         </div>
       </Grid>

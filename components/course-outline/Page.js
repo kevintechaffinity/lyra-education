@@ -1,8 +1,9 @@
 import React from 'react';
+import { FaCheckCircle } from 'react-icons/fa';
 import Link from 'next/link';
+import PropTypes from 'prop-types';
 
 import styles from '../../styles/components/OutlineContainer.module.sass';
-import Icon from '../Icon';
 
 export default function Page({ page, index }) {
   return (
@@ -10,9 +11,7 @@ export default function Page({ page, index }) {
       {page.status === 'COMPLETED' ? (
         <span className={styles.outlineContainer__label}>
           <b>Page {index + 1}: </b>
-          <Link href={page.slug}>
-            <a>{page.name}</a>
-          </Link>
+          <Link href={page.slug}>{page.name}</Link>
         </span>
       ) : (
         <span className={styles.outlineContainer__label}>
@@ -20,7 +19,20 @@ export default function Page({ page, index }) {
           {page.name}
         </span>
       )}
-      {page.status === 'COMPLETED' && <Icon name="FaCheckCircle" />}
+      {page.status === 'COMPLETED' && (
+        <i className="icon">
+          <FaCheckCircle />
+        </i>
+      )}
     </div>
   );
 }
+
+Page.propTypes = {
+  page: PropTypes.shape({
+    name: PropTypes.string,
+    slug: PropTypes.string,
+    status: PropTypes.string,
+  }).isRequired,
+  index: PropTypes.number.isRequired,
+};

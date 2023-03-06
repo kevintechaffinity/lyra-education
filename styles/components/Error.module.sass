@@ -1,0 +1,32 @@
+@import '../config'
+@import '../mixins'
+
+.error
+  display: flex
+  align-items: center
+  justify-content: center
+  flex-direction: column
+  height: calc((100vh - 305px))
+
+  @include respond-to('medium')
+    height: calc((100vh - 424px))
+
+  &__title
+    font-weight: 900
+
+  &__button
+    +font-bold
+    +transition
+    background-color: $primary
+    border: none
+    color: $black
+    cursor: pointer
+    display: inline-flex
+    align-items: center
+    font-size: 14px
+    padding: 16px 24px
+    text-align: center
+    text-transform: uppercase
+    line-height: 0.85
+    text-align: left
+    border-radius: 45px

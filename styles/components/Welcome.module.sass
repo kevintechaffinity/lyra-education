@@ -1,12 +1,6 @@
 @import '../config'
 @import '../mixins'
 
-@keyframes slideDown
-  0%
-    transform: translateY(-200%)
-  100%
-    transform: translateY(0%)
-
 .welcome
   background-color: $white
   border-radius: $default-radius
@@ -85,12 +79,12 @@
 
   &__close
     +font-bold
-    color: $primary
+    color: $neutral-700
     cursor: pointer
     display: inline-block
     margin-left: auto
     margin-right: auto
-    margin-top: 20px
+    margin-top: 10px
     text-align: center
     text-transform: uppercase
     width: 100%

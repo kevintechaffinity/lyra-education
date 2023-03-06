@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { motion, useAnimation } from 'framer-motion';
+import PropTypes from 'prop-types';
 
 export const Easing = [0.6, -0.05, 0.01, 0.99];
 
@@ -17,7 +18,7 @@ export const FadeIn = {
   },
 };
 
-export default function ScrollFade({ threshold = 0.5, children }) {
+export default function ScrollFade({ threshold, children }) {
   const controls = useAnimation();
   const [ref, inView] = useInView({ threshold });
 
@@ -44,3 +45,12 @@ export default function ScrollFade({ threshold = 0.5, children }) {
     </motion.div>
   );
 }
+
+ScrollFade.defaultProps = {
+  threshold: 0,
+};
+
+ScrollFade.propTypes = {
+  threshold: PropTypes.number,
+  children: PropTypes.node.isRequired,
+};

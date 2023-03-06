@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import Router from 'next/router';
+import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import { Remarkable } from 'remarkable';
 
 import ContentAudio from '../../../components/ContentAudio';
@@ -9,87 +9,74 @@ import ContentImage from '../../../components/ContentImage';
 import ContentVideo from '../../../components/ContentVideo';
 import Grid from '../../../components/Grid';
 import PageHeader from '../../../components/headers/PageHeader';
-import PageBanner from '../../../components/PageBanner';
+import Hero from '../../../components/Hero';
 import Progress from '../../../components/Progress';
 import Steps from '../../../components/Steps';
-import ServiceContext from '../../../context/ServiceContext';
-import { getModule, getPage } from '../../../services/http/Content';
+import useService from '../../../hooks/useService';
+import useSubscribed from '../../../hooks/useSubscribed';
+import { getModule, getPage } from '../../../services/Content';
 
-export default class Page extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      page: {},
-      module: {},
-    };
-    this.waitForAppMounted = this.waitForAppMounted.bind(this);
-  }
+export default function Page() {
+  const router = useRouter();
+  const [page, setPage] = useState({});
+  const [module, setModule] = useState({});
 
-  componentDidMount() {
-    this.waitForAppMounted().then(() => {
-      const { module, page, preview } = Router.router.query;
-      const { subscribed, subscribeUrl, metadata } = this.context;
+  const { subscriptionStatus } = useSubscribed();
+  const { service } = useService();
 
-      if (!subscribed && metadata.subscribe) {
-        if (!preview) {
-          window.location.href = subscribeUrl;
-          return;
-        }
+  useEffect(() => {
+    if (!service) return;
+
+    if (!subscriptionStatus.subscribed.hasAccess && service.metadata.subscribe) {
+      if (!router.query.preview) {
+        window.location.href = service.subscribeUrl;
       }
+    }
+  }, [service, router.query, subscriptionStatus]);
 
-      getModule(module).then((data) => {
-        this.setState({ module: data });
-      });
-
-      getPage(page, preview).then((data) => {
-        this.setState({ page: data });
-      });
-    });
-  }
-
-  waitForAppMounted() {
-    return new Promise((resolve) => {
-      const loop = setInterval(() => {
-        const { appMounted } = this.props;
-        if (!appMounted) {
-          return;
-        }
-        clearInterval(loop);
-        resolve();
-      }, 50);
-    });
-  }
-
-  render() {
-    const { page, module } = this.state;
-
-    const md = new Remarkable();
-    md.set({
-      html: true,
-      breaks: true,
+  useEffect(() => {
+    getPage(router.query.page, router.query.preview).then((data) => {
+      setPage(data);
     });
 
-    return (
-      <>
-        <PageBanner item={page} />
-        <Grid>
-          <PageHeader item={page} module={module} />
-          <ContentContainer>
-            <span dangerouslySetInnerHTML={{ __html: md.render(page.introduction) }} />
-            {page.assets && page.assets.audio && (
-              <ContentAudio publicId={page.assets.audio} name={page.name} />
-            )}
-            {page.assets && page.assets.video && <ContentVideo publicId={page.assets.video} />}
-            {page.assets && page.assets.image && <ContentImage publicId={page.assets.image} />}
-            <span dangerouslySetInnerHTML={{ __html: md.render(page.description) }} />
-            <ContentContainerSummary summary={page.summary} />
-          </ContentContainer>
-          <Steps page={page} />
-          <Progress progress={page.progress} />
-        </Grid>
-      </>
-    );
-  }
+    getModule(router.query.module).then((data) => {
+      setModule(data);
+    });
+  }, [router.query]);
+
+  const md = new Remarkable();
+
+  md.set({
+    html: true,
+    breaks: true,
+  });
+
+  if (!module) return null;
+  if (!service) return null;
+  if (!page) return null;
+
+  return (
+    <>
+      {service.assets && <Hero banner={service.assets.banner} />}
+      <Grid>
+        <PageHeader item={page} module={module} />
+        <ContentContainer>
+          <span dangerouslySetInnerHTML={{ __html: md.render(page.introduction) }} />
+          {page.assets && page.assets.audio && (
+            <ContentAudio publicId={page.assets.audio} name={page.name} />
+          )}
+          {page.assets && page.assets.video && (
+            <ContentVideo publicId={page.assets.video} poster={page.assets.image} />
+          )}
+          {page.assets && !page.assets.video && page.assets.image && (
+            <ContentImage publicId={page.assets.image} />
+          )}
+          <span dangerouslySetInnerHTML={{ __html: md.render(page.description) }} />
+          {page.summary && <ContentContainerSummary summary={page.summary} />}
+        </ContentContainer>
+        <Steps page={page} />
+        {page.progress && <Progress progress={page.progress} />}
+      </Grid>
+    </>
+  );
 }
-
-Page.contextType = ServiceContext;

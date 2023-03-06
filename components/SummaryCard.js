@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import styles from '../styles/components/Summary.module.sass';
 
@@ -10,3 +11,8 @@ export default function SummaryCard({ count, description }) {
     </div>
   );
 }
+
+SummaryCard.propTypes = {
+  count: PropTypes.number.isRequired,
+  description: PropTypes.string.isRequired,
+};

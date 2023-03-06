@@ -12,10 +12,10 @@
 
   h1
     line-height: 1
+    font-weight: 900
 
   h1,
   h2
-    +text-shadow
     color: $white
 
   h2
@@ -40,8 +40,6 @@
     text-align: left
     color: white
     margin-top: -$padding-5
-    margin-left: $padding-1
-    margin-right: $padding-1
     z-index: 1
 
   &__image
@@ -53,10 +51,9 @@
   &__status
     +font-bold
     +transition
-    text-shadow: 0px 1px 4px rgba(0,0,0,0.3)
     background-color: $primary
     border: none
-    color: inherit
+    color: $neutral-800
     display: inline-flex
     align-items: center
     gap: 10px
@@ -74,7 +71,7 @@
       min-width: 260px
 
     svg
-      color: white
+      color: $neutral-800
 
 @include respond-to('small')
 
@@ -87,8 +84,6 @@
     &__content
       max-width: 70%
       margin-top: -$padding-7
-      margin-left: $padding-2
-      margin-right: $padding-2
 
     h2
       margin-bottom: $padding-3
@@ -104,8 +99,6 @@
     &__content
       max-width: 73%
       margin-top: -$padding-12
-      margin-left: $padding-2
-      margin-right: $padding-2
 
     h1
       line-height: 1.10

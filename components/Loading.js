@@ -2,9 +2,9 @@ import React from 'react';
 
 import styles from '../styles/components/Loading.module.sass';
 
-export default function Loading({ page }) {
+export default function Loading() {
   return (
-    <div className={`${styles.loading} ${page ? styles.loading__page : ''} `}>
+    <div className={`${styles.loading}`}>
       <div className={styles.loading__content}>
         <div />
         <div />

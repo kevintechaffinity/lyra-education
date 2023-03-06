@@ -1,23 +1,33 @@
-import React, { useContext } from 'react';
+import React from 'react';
+import { FaAngleLeft, FaInbox, FaRegCalendarAlt, FaUserCircle } from 'react-icons/fa';
+import { getCookie } from 'cookies-next';
+import { DateTime } from 'luxon';
 import Link from 'next/link';
 import Router from 'next/router';
 import pluralize from 'pluralize';
+import PropTypes from 'prop-types';
 
-import ServiceContext from '../../context/ServiceContext';
+import useCompleted from '../../hooks/useCompleted';
+import useService from '../../hooks/useService';
+import useSubscribed from '../../hooks/useSubscribed';
 import styles from '../../styles/components/ModuleHeader.module.sass';
-import Icon from '../Icon';
 import Image from '../Image';
 import ScrollFade from '../ScrollFade';
 
-const { DateTime } = require('luxon');
-
 export default function ModuleHeader({ slug, item }) {
-  const { completedToday, loggedIn, loginUrl, subscribeUrl, subscribed, callToAction, metadata } =
-    useContext(ServiceContext);
   const { name, duration, author, updatedAt, status, assets } = item;
+  const { completionStatus } = useCompleted();
+  const { service } = useService();
+  const { subscriptionStatus } = useSubscribed();
+
+  const { metadata, callToAction, loginUrl, subscribeUrl } = service;
+  const loggedIn = !!getCookie('token');
+
+  if (!completionStatus) return null;
+  if (!service) return null;
 
   const button = () => {
-    if (completedToday && status === 'ACTIVE') return 'Tomorrow';
+    if (completionStatus?.completedToday && status === 'ACTIVE') return 'Tomorrow';
     if (status === 'COMPLETED') return 'Completed';
     if (status === 'ACTIVE') {
       return 'Continue';
@@ -29,18 +39,14 @@ export default function ModuleHeader({ slug, item }) {
   };
 
   const buttonClass = () => {
-    if (completedToday && status === 'ACTIVE') return '';
+    if (completionStatus?.completedToday && status === 'ACTIVE') return '';
     if (status === 'COMPLETED') return styles.moduleHeader__review;
     if (status === 'ACTIVE') return styles.moduleHeader__current;
     if (status === 'READY') return styles.moduleHeader__current;
     return '';
   };
 
-  const durationPagination = () => (
-    <Link href="/">
-      <a>Home</a>
-    </Link>
-  );
+  const durationPagination = () => <Link href="/">Home</Link>;
 
   const durationFormatted = () => `${duration} ${pluralize('day', parseInt(duration, 10))}`;
   const authorFormatted = () => `By ${author}`;
@@ -49,49 +55,71 @@ export default function ModuleHeader({ slug, item }) {
 
   const handleClick = (event) => {
     event.preventDefault();
+
     if (!loggedIn) {
       window.location.href = loginUrl;
       return;
     }
 
-    if (!subscribed && metadata.subscribe) {
+    if (!subscriptionStatus.subscribed.hasAccess && service.metadata.subscribe) {
       window.location.href = subscribeUrl;
       return;
     }
+
     Router.push(slug);
   };
 
   return (
     <ScrollFade>
       <div className={styles.moduleHeader}>
-        {assets && <Image publicId={assets.thumbnail} className={styles.moduleHeader__image} />}
+        {assets && (
+          <Image
+            width={200}
+            height={160}
+            objectFit="cover"
+            objectPosition="center"
+            publicId={assets.thumbnail}
+            className={styles.moduleHeader__image}
+            alt={name}
+          />
+        )}
         <div className={styles.moduleHeader__column}>
           <h3 className={styles.moduleHeader__title}>{name}</h3>
           {name && (
             <>
               <span className={styles.moduleHeader__details}>
                 <span className={styles.moduleHeader__detailsitem}>
-                  <Icon name="FaInbox" />
+                  <i className="icon">
+                    <FaInbox />
+                  </i>
                   {durationFormatted()}
                 </span>
                 <span className={styles.moduleHeader__detailsitem}>
-                  <Icon name="FaUserCircle" />
+                  <i className="icon">
+                    <FaUserCircle />
+                  </i>
                   {authorFormatted()}
                 </span>
                 <span className={styles.moduleHeader__detailsitem}>
-                  <Icon name="FaRegCalendarAlt" />
+                  <i className="icon">
+                    <FaRegCalendarAlt />
+                  </i>
                   {dateFormatted()}
                 </span>
               </span>
               <span className={styles.moduleHeader__detailsitem}>
-                <Icon name="FaAngleLeft" />
+                <i className="icon">
+                  <FaAngleLeft />
+                </i>
                 {durationPagination()}
               </span>{' '}
             </>
           )}
         </div>
 
-        {status === 'COMPLETED' || completedToday || !subscribed ? (
+        {status === 'COMPLETED' ||
+        completionStatus?.completedToday ||
+        !subscriptionStatus.subscribed.hasAccess ? (
           ''
         ) : (
           <a onClick={handleClick} className={`${styles.moduleHeader__status} ${buttonClass()}`}>
@@ -99,7 +127,7 @@ export default function ModuleHeader({ slug, item }) {
           </a>
         )}
 
-        {!subscribed && metadata.subscribe && (
+        {!subscriptionStatus.subscribed.hasAccess && metadata.subscribe && (
           <a onClick={handleClick} className={`${styles.moduleHeader__status} ${buttonClass()}`}>
             {callToAction}
           </a>
@@ -108,3 +136,17 @@ export default function ModuleHeader({ slug, item }) {
     </ScrollFade>
   );
 }
+
+ModuleHeader.propTypes = {
+  item: PropTypes.shape({
+    name: PropTypes.string,
+    duration: PropTypes.number,
+    author: PropTypes.string,
+    updatedAt: PropTypes.string,
+    status: PropTypes.string,
+    assets: PropTypes.shape({
+      thumbnail: PropTypes.string,
+    }),
+  }).isRequired,
+  slug: PropTypes.string.isRequired,
+};

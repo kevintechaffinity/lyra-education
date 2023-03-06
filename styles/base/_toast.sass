@@ -1,0 +1,17 @@
+@import '../config'
+@import '../mixins'
+
+.Toastify
+  &__toast-icon
+    display: none !important
+
+  &__toast
+    border: 1px solid $neutral-200 !important
+    padding: $padding-2 !important
+    border-radius: 10px !important
+
+    @include respond-to('small')
+      border-radius: 20px !important
+
+  &__progress-bar
+    background-color: $primary !important
