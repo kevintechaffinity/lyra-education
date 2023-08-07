@@ -60,10 +60,10 @@ export default function Footer() {
           </Link>
 
           <div className={styles.footer__copy}>
-            Copyright <b>{metadata.title}</b>. Product of <b>MaxLife</b>
+            &copy; Copyright <b>{metadata.title}</b>. Product of <b>MaxLife</b>
             <sup style={{ fontSize: '12px', top: '-5px', position: 'relative' }}>&trade;</sup>
             <br />
-            All rights reserved 2020 - {new Date().getFullYear()}.
+            All rights reserved 2020.
           </div>
         </div>
       </div>

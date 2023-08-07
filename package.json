@@ -7,7 +7,7 @@
     "watch": "next",
     "build": "next build",
     "analyze": "ANALYZE=true next build",
-    "start": "next start"
+    "start": "next start --port 3004"
   },
   "repository": {
     "type": "git",
