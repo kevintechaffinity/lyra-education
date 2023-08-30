@@ -32,7 +32,7 @@ export const BuildPlaceholderUrl = (id) =>
 export const BuildThumbnail = (id, width, height) =>
   buildUrl(id, {
     cloud: {
-      cloudName: 'dzabdxdw5',
+      cloudName: 'dexvrwlip',
     },
     transformations: {
       format: 'png',
