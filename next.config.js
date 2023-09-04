@@ -15,7 +15,7 @@ module.exports = withPWA(
     publicRuntimeConfig: {
       appEnv: process.env.APP_ENV || 'production',
       hostApi: process.env.HOST_API || 'EMPTY',
-      cloudinaryCloudName: 'dexvrwlip',
+      cloudinaryCloudName: 'dzabdxdw5',
     },
     images: {
       domains: ['res.cloudinary.com'],
