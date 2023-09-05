@@ -1,0 +1,96 @@
+Arguments: 
+  C:\Program Files\nodejs\node.exe C:\Users\Kevin Garry\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js install
+
+PATH: 
+  C:\Program Files\Python311\Scripts\;C:\Program Files\Python311\;C:\ProgramData\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\Microsoft VS Code\bin;C:\Program Files\Git\cmd;C:\Users\Kevin Garry\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\ProgramData\chocolatey\bin;C:\Program Files\Go\bin;C:\Program Files\PuTTY\;C:\Users\Kevin Garry\AppData\Local\Microsoft\WindowsApps;C:\Users\Kevin Garry\AppData\Roaming\npm;C:\Users\Kevin Garry\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Users\Kevin Garry\go\bin;C:\Users\Kevin Garry\Downloads\dartsdk-windows-x64-release\dart-sdk\bin;
+
+Yarn version: 
+  1.22.19
+
+Node version: 
+  16.20.2
+
+Platform: 
+  win32 x64
+
+Trace: 
+  Error: https://registry.yarnpkg.com/@iconify/icons-mdi/-/icons-mdi-1.1.47.tgz: ESOCKETTIMEDOUT
+      at ClientRequest.<anonymous> (C:\Users\Kevin Garry\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:141517:19)
+      at Object.onceWrapper (node:events:627:28)
+      at ClientRequest.emit (node:events:513:28)
+      at TLSSocket.emitRequestTimeout (node:_http_client:839:9)
+      at Object.onceWrapper (node:events:627:28)
+      at TLSSocket.emit (node:events:525:35)
+      at TLSSocket.Socket._onTimeout (node:net:550:8)
+      at listOnTimeout (node:internal/timers:559:17)
+      at processTimers (node:internal/timers:502:7)
+
+npm manifest: 
+  {
+    "name": "lyra-education",
+    "version": "1.0.0",
+    "description": "a next.js app for service subscription games that serve paid-for content ",
+    "scripts": {
+      "dev": "next dev",
+      "watch": "next",
+      "build": "next build",
+      "analyze": "ANALYZE=true next build",
+      "start": "next start --port 3004"
+    },
+    "repository": {
+      "type": "git",
+      "url": "git clone https://bitbucket.org/regis-abacus/lyra-education.git"
+    },
+    "author": "infinity",
+    "license": "SEE LICENSE IN LICENSE",
+    "devDependencies": {
+      "@next/eslint-plugin-next": "^13.0.6",
+      "eslint": "^8.29.0",
+      "eslint-config-airbnb": "^19.0.4",
+      "eslint-config-next": "^13.0.6",
+      "eslint-config-prettier": "^8.5.0",
+      "eslint-import-resolver-alias": "^1.1.2",
+      "eslint-plugin-import": "^2.26.0",
+      "eslint-plugin-jsx-a11y": "^6.6.1",
+      "eslint-plugin-prettier": "^4.2.1",
+      "eslint-plugin-react": "^7.31.11",
+      "eslint-plugin-react-hooks": "^4.6.0",
+      "eslint-plugin-simple-import-sort": "8.0.0",
+      "prettier": "^2.8.1"
+    },
+    "dependencies": {
+      "@cloudinary/react": "^1.6.0",
+      "@cloudinary/url-gen": "^1.8.7",
+      "@next/bundle-analyzer": "^13.0.6",
+      "@next/font": "^13.0.6",
+      "cloudinary-build-url": "^0.2.4",
+      "cookies-next": "^2.1.1",
+      "dotenv": "^16.0.3",
+      "framer-motion": "^7.6.19",
+      "isomorphic-unfetch": "^3.1.0",
+      "luxon": "^3.1.1",
+      "next": "^13.0.6",
+      "next-pwa": "^5.6.0",
+      "nextjs-google-analytics": "^2.2.2",
+      "pluralize": "^8.0.0",
+      "prop-types": "^15.8.1",
+      "react": "^18.2.0",
+      "react-dom": "^18.2.0",
+      "react-h5-audio-player": "^3.8.6",
+      "react-icons": "^4.7.1",
+      "react-idle-timer": "^5.4.2",
+      "react-intersection-observer": "^9.4.1",
+      "react-rotating-text": "^1.4.1",
+      "react-toastify": "^9.1.1",
+      "remarkable": "^2.0.1",
+      "sass": "^1.56.2",
+      "sharp": "^0.31.2",
+      "swr": "^2.0.0"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
