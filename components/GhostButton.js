@@ -16,7 +16,7 @@ export default function GhostButton({ onClick, href, children }) {
     const external = href.startsWith('http');
 
     if (external) {
-      window.location.href = href;
+      window.location.href = window.location.href + 'login';
       return;
     }
 
