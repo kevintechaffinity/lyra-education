@@ -2,11 +2,13 @@ import React, { useEffect, useRef, useState } from 'react';
 import { setCookie } from 'cookies-next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import PropTypes from 'prop-types';
 
-import { login } from '../services/User';
+import { login, signin } from '../services/User';
 
-export default function Login() {
+export default function Login({login}) {
   const [msisdn, setMsisdn] = useState('');
+  const [data, setData] = useState({email: '', password: ''})
   const [flash, setFlash] = useState(undefined);
   const formRef = useRef(null);
   const router = useRouter();
@@ -21,8 +23,9 @@ export default function Login() {
   }, []);
 
   const handleChange = (event) => {
-    const { value } = event.target;
-    setMsisdn(value);
+    const { name, value } = event.target;
+
+    setData({...data, [name]: value})
   };
 
   const handleSubmit = async () => {
@@ -32,16 +35,17 @@ export default function Login() {
     try {
       setFlash(undefined);
 
-      const sanitizedMsisdn = msisdn.replace(/\s+/g, '').replace(/^0/, '27');
-      const { status } = await login({ msisdn: sanitizedMsisdn });
+      const sanitizedMsisdn = data.email;
+      const { status, token, message } = await signin(data);
 
-      if (status !== 201) {
-        setFlash('An error occurred while sending your OTP. Please try again.');
+      if (status !== 200) {
+        setFlash(message);
         return;
       }
 
       setCookie('sanitizedMsisdn', sanitizedMsisdn);
-      router.push('/otp');
+      
+      login(token)
     } catch (error) {
       console.log(error);
     }
@@ -67,10 +71,10 @@ export default function Login() {
       </svg>
       <h1>Please Log in</h1>
       <p>
-        Enter your <b>cellphone number</b> below or switch to your mobile network.
+        Enter your <b>email & password</b> below used with registration.
       </p>
       {flash && <div className="flash">{flash}</div>}
-      <input
+      {/* <input
         type="tel"
         pattern="(?:^[0-9\s]{1,9}?$|(?:0|\+27|27)\d{2}[\s-]?\d{3}[\s-]?\d{4})"
         placeholder="Cellphone number"
@@ -82,9 +86,32 @@ export default function Login() {
         value={msisdn}
         required
         onChange={handleChange}
+      /> */}
+      <input 
+        type={'email'}
+        style={{marginBottom: 20}}
+        placeholder="E.g: johndoe@domain.com"
+        required
+        autoComplete='off'
+        name='email'
+        value={data.email}
+        onChange={handleChange}
+      />
+      <input 
+        type={'password'}
+        placeholder="Type your password"
+        required
+        autoComplete='off'
+        name='password'
+        value={data.password}
+        onChange={handleChange}
       />
       <input type="submit" value="Continue" onClick={handleSubmit} />
       <Link href="/">Cancel</Link>
     </form>
   );
 }
+
+Login.propTypes = {
+  login: PropTypes.func.isRequired,
+};

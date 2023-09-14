@@ -43,7 +43,7 @@ export default function App({ Component, pageProps }) {
 
   const login = (token) => {
     setCookie('token', token, { expires: addOneYear(new Date()) });
-    const { hasAccess } = subscriptionStatus.subscribed || { hasAccess: false };
+    const { hasAccess } = subscriptionStatus.subscribed || { hasAccess: true };
     if (hasAccess) {
       router.push('/?welcome=true');
       return;

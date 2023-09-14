@@ -7,6 +7,11 @@ export const login = async ({ msisdn }) => {
   return response;
 };
 
+export const signin = async (payload) => {
+  const response = await post({ request: '/signin', body: { email: payload.email, password: payload.password } });
+  return response;
+};
+
 export const autologin = async (t) => {
   setCookie('token', t, { sameSite: true, maxAge: 31556952, secure: false });
 };

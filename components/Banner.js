@@ -40,7 +40,7 @@ export default function Banner() {
   };
 
   const button = () => {
-    if (!subscriptionStatus.subscribed.hasAccess && metadata.subscribe)
+    if (false && metadata.subscribe)
       return <SignupButton label={callToAction} campaign={campaign} />;
 
     if (completionStatus?.completedToday)
