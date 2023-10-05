@@ -1,20 +1,16 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import { choosePlan } from '../services/Payment';
-import ReactHtmlParser from 'react-html-parser';
-
 const Billing = () => {
   const [selectedBilling, setSelectedBilling] = useState(null);
   const [htmlContent, setHTMLContent] = useState('');
 
   const choosePlan = async (payload) => {
-    const result = await axios.post('http://localhost:8081/v1/payment-initialize');
-    setHTMLContent(result.data);
+    console.log('Payload');
   };
 
   return (
     <div className="container mt-md-5">
-      {ReactHtmlParser(htmlContent)}
       <div className="row">
         <div className="col-md-6 px-5">
           <h3>Select a Plan</h3>
