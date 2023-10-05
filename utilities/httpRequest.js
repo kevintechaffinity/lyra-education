@@ -22,3 +22,17 @@ export const post = async ({ request, params, body }) => {
 
   return res.json();
 };
+
+export const patch = async ({ request, params, body }) => {
+  const baseUrl = GetBaseUrl();
+  const uri = `${baseUrl}${request}`;
+  const res = await fetch(uri, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(body),
+  });
+
+  return res.json();
+};

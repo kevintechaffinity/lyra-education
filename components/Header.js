@@ -29,7 +29,7 @@ export default function Header() {
               Your Progress
             </GhostButton>
           )}
-          {!loggedIn && <GhostButton href={loginUrl}>Login</GhostButton>}
+          {!loggedIn && <GhostButton href={'/signup'}>Join Now</GhostButton>}
         </div>
       </header>
     </Grid>

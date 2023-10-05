@@ -29,7 +29,7 @@ export default function Page() {
 
     if (!subscriptionStatus.subscribed.hasAccess && service.metadata.subscribe) {
       if (!router.query.preview) {
-        window.location.href = service.subscribeUrl;
+        router.push('/billing')
       }
     }
   }, [service, router.query, subscriptionStatus]);

@@ -3,7 +3,7 @@ import { FaAngleLeft, FaInbox, FaRegCalendarAlt, FaUserCircle } from 'react-icon
 import { getCookie } from 'cookies-next';
 import { DateTime } from 'luxon';
 import Link from 'next/link';
-import Router from 'next/router';
+import {useRouter} from 'next/router';
 import pluralize from 'pluralize';
 import PropTypes from 'prop-types';
 
@@ -19,6 +19,7 @@ export default function ModuleHeader({ slug, item }) {
   const { completionStatus } = useCompleted();
   const { service } = useService();
   const { subscriptionStatus } = useSubscribed();
+  const router = useRouter();
 
   const { metadata, callToAction, loginUrl, subscribeUrl } = service;
   const loggedIn = !!getCookie('token');
@@ -62,11 +63,11 @@ export default function ModuleHeader({ slug, item }) {
     }
 
     if (!subscriptionStatus.subscribed.hasAccess && service.metadata.subscribe) {
-      window.location.href = subscribeUrl;
+      router.push('/billing')
       return;
     }
 
-    Router.push(slug);
+    router.push(slug);
   };
 
   return (

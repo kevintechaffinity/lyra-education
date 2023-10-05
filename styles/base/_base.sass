@@ -5,6 +5,7 @@ body
   font-size: 14px
   line-height: 1.5
   font-weight: 400
+  overflow-x: hidden !important
   scroll-behavior: smooth
   -webkit-font-smoothing: antialiased
   -moz-osx-font-smoothing: grayscale
@@ -17,8 +18,10 @@ body
     min-width: 0
 
   &.join,
-  &.login
+  &.signup
     background-color: $primary
+  &.login
+    height: 100vh
     header,
     footer
       display: none
@@ -27,6 +30,22 @@ body
     header,
     footer
       display: none
+
+  .bg-image
+    background-image: linear-gradient(to bottom, rgba(34, 32, 32, 50%), rgba(34, 32, 32, 50%)), url("../../public/images/landing.png") !important
+    background-color: rgba(34, 32, 32, 66%) !important
+    background-size: cover
+    background-position: center
+    background-repeat: no-repeat
+    height: 55vh
+    border-radius: 7px
+    object-fit: cover
+    margin: 15px
+    display: flex
+    justify-content: center
+
+  .-mt-10
+    margin-top: -9%
 
 @include respond-to('medium')
   body

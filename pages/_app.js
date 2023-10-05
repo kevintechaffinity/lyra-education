@@ -17,7 +17,9 @@ import WelcomePopup from '../components/WelcomePopup';
 import useService from '../hooks/useService';
 import useSubscribed from '../hooks/useSubscribed';
 import { addOneYear } from '../utilities/date';
+import { hasCookie } from 'cookies-next';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-toastify/dist/ReactToastify.css';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -40,6 +42,10 @@ export default function App({ Component, pageProps }) {
       setShowWelcome(true);
     }
   }, [router.query]);
+
+  // useEffect(() => {
+  //   require('bootstrap/dist/js/bootstrap.bundle.js');
+  // }, []);
 
   const login = (token) => {
     setCookie('token', token, { expires: addOneYear(new Date()) });
