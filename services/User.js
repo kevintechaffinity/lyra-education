@@ -1,9 +1,27 @@
 import { setCookie } from 'cookies-next';
 
-import { post } from '../utilities/httpRequest';
+import { post, patch } from '../utilities/httpRequest';
 
 export const login = async ({ msisdn }) => {
   const response = await post({ request: '/login', body: { msisdn } });
+  return response;
+};
+
+export const signin = async (payload) => {
+  const response = await post({
+    request: '/signin',
+    body: { email: payload.email, password: payload.password },
+  });
+  return response;
+};
+
+export const signup = async (payload) => {
+  const response = await post({ request: '/signup', body: payload });
+  return response;
+};
+
+export const verify = async (token) => {
+  const response = await patch({ request: `/verify-email?token=${token}` });
   return response;
 };
 

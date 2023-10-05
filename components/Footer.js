@@ -21,7 +21,7 @@ export default function Footer() {
     <footer className={styles.footer}>
       <div className={styles.footer__container}>
         <div className={styles.footer__column}>
-          {!subscriptionStatus.subscribed.hasAccess && metadata.subscribe ? (
+          {true && metadata.subscribe ? (
             <a href={subscribeUrl}>
               <span dangerouslySetInnerHTML={{ __html: `Join ${metadata.title}` }} />
               <i className="icon">
@@ -46,7 +46,7 @@ export default function Footer() {
             </a>
           )}
 
-          {subscriptionStatus.subscribed.hasAccess && metadata.unsubscribe && (
+          {true && metadata.unsubscribe && (
             <a href={unsubscribeUrl}>
               <span dangerouslySetInnerHTML={{ __html: 'Unsubscribe' }} />
             </a>

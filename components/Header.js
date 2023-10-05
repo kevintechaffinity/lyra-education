@@ -24,12 +24,12 @@ export default function Header() {
       <header className={styles.header}>
         <Logo />
         <div className={styles.header__column}>
-          {loggedIn && subscriptionStatus.subscribed.hasAccess && (
+          {loggedIn && true && (
             <GhostButton href="/progress" badge>
               Your Progress
             </GhostButton>
           )}
-          {!loggedIn && <GhostButton href={loginUrl}>Login</GhostButton>}
+          {!loggedIn && <GhostButton href={'/signup'}>Join Now</GhostButton>}
         </div>
       </header>
     </Grid>
