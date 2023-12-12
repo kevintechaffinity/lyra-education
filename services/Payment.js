@@ -1,3 +1,10 @@
+import { post } from "../utilities/httpRequest";
+
+export const payHere = async (amount, item_name) => {
+  const response = await post({request: `/payhere`, body: {amount, item_name} })
+  return response;
+} 
+
 export const choosePlan = async () => {
   const url = 'https://secure.paygate.co.za/payweb3/process.trans';
   const formData = new FormData();

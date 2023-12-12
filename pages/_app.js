@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Helmet } from "react-helmet";
 import { ToastContainer } from 'react-toastify';
 import { Cloudinary } from '@cloudinary/url-gen';
 import { Inter } from '@next/font/google';
@@ -69,6 +70,9 @@ export default function App({ Component, pageProps }) {
 
   return (
     <>
+      <Helmet>
+        <script src="https://www.payfast.co.za/onsite/engine.js"></script>
+      </Helmet>
       <Seo
         title={metadata.title && `${metadata.title} - ${metadata.heading}`}
         name={name}

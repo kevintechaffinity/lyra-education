@@ -1,145 +1,174 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-import { choosePlan } from '../services/Payment';
+import { payHere } from '../services/Payment';
+import { MdOutlineCheck } from "react-icons/md";
+
 const Billing = () => {
   const [selectedBilling, setSelectedBilling] = useState(null);
   const [htmlContent, setHTMLContent] = useState('');
 
-  const choosePlan = async (payload) => {
-    console.log('Payload');
+  const choosePlan = async ({amount, item_name}) => {
+    const result = await payHere(amount, item_name);
+    if(result.uuid) {
+      window.payfast_do_onsite_payment({
+        "uuid": result.uuid,
+        "return_url": window.location.origin + "/successpay",
+        "cancel_url": window.location.origin + "/failedpay"
+      });
+    }
   };
 
   return (
-    <div className="container mt-md-5">
-      <div className="row">
-        <div className="col-md-6 px-5">
-          <h3>Select a Plan</h3>
-          <h6>
-            <small className="text-muted">Select one plan of the three to go with</small>
-          </h6>
-          <div className="my-5">
-            <div className="my-3">
-              <div className="d-flex align-items-center justify-content-between shadow p-3">
-                <div>
-                  <span className="p-0 m-0">
-                    <small className="text-muted">Duration</small>
-                  </span>
-                  <h5 className="p-0 my-2">
-                    <small>
-                      1 Month -{' '}
-                      <span>
-                        <small className="font-weight-bold">$16</small>
-                      </span>
-                    </small>
-                  </h5>
-                </div>
-                <div>
-                  <button
-                    onClick={() => choosePlan({ plan: '1 month', amount: 19, currency: 'USD' })}
-                    className="btn btn-sm btn-outline-secondary rounded-pill"
-                  >
-                    <small>Get Started</small>
-                  </button>
-                </div>
-              </div>
-            </div>
-            <div className="my-3">
-              <div className="d-flex align-items-center justify-content-between shadow p-3">
-                <div>
-                  <span className="p-0 m-0">
-                    <small className="text-muted">Duration</small>
-                  </span>
-                  <h5 className="p-0 my-2">
-                    <small>
-                      6 Months -{' '}
-                      <span>
-                        <small className="font-weight-bold">$68</small>
-                      </span>
-                    </small>
-                  </h5>
-                </div>
-                <div>
-                  <button className="btn btn-sm btn-outline-secondary rounded-pill">
-                    <small>Get Started</small>
-                  </button>
+    <>
+      <div className="container mt-md-5">
+        <div className="row">
+          <div className="col-md-6 px-5">
+            <h3>Select a Plan</h3>
+            <h6>
+              <small className="text-muted">Select one plan of the three to go with</small>
+            </h6>
+            <div className="my-5">
+              <div className="my-3">
+                <div className="d-flex align-items-center justify-content-between shadow p-3">
+                  <div>
+                    <span className="p-0 m-0">
+                      <small className="text-muted">Duration</small>
+                    </span>
+                    <h6 className="p-0 my-2">
+                      <small>
+                        1 Month -{' '}
+                        <span>
+                          <small className="font-weight-bold">ZAR 200</small>
+                        </span>
+                      </small>
+                    </h6>
+                  </div>
+                  <div>
+                    <button
+                      onClick={() => choosePlan({amount: '200', item_name: '1 Month' })}
+                      className="btn btn-sm btn-outline-secondary rounded-pill"
+                    >
+                      <small>Get Started</small>
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="my-3">
-              <div className="d-flex align-items-center justify-content-between shadow p-3">
-                <div>
-                  <span className="p-0 m-0">
-                    <small className="text-muted">Duration</small>
-                  </span>
-                  <h5 className="p-0 my-2">
-                    <small>
-                      1 Year -{' '}
-                      <span>
-                        <small className="font-weight-bold">$168</small>
-                      </span>
-                    </small>
-                  </h5>
+              <div className="my-3">
+                <div className="d-flex align-items-center justify-content-between shadow p-3">
+                  <div>
+                    <span className="p-0 m-0">
+                      <small className="text-muted">Duration</small>
+                    </span>
+                    <h6 className="p-0 my-2">
+                      <small>
+                        6 Months -{' '}
+                        <span>
+                          <small className="font-weight-bold">ZAR 900</small>
+                        </span>
+                      </small>
+                    </h6>
+                  </div>
+                  <div>
+                    <button 
+                      onClick={() => choosePlan({amount: '900', item_name: '6 Month' })}
+                      className="btn btn-sm btn-outline-secondary rounded-pill"
+                    >
+                      <small>Get Started</small>
+                    </button>
+                  </div>
                 </div>
-                <div>
-                  <button className="btn btn-sm btn-outline-secondary rounded-pill">
-                    <small>Get Started</small>
-                  </button>
+              </div>
+              <div className="my-3">
+                <div className="d-flex align-items-center justify-content-between shadow p-3">
+                  <div>
+                    <h6 className="p-0 m-0">
+                      <small className="text-muted">Duration</small>
+                    </h6>
+                    <h6 className="p-0 my-2">
+                      <small>
+                        1 Year -{' '}
+                        <span>
+                          <small className="font-weight-bold">ZAR 2000</small>
+                        </span>
+                      </small>
+                    </h6>
+                  </div>
+                  <div>
+                    <button 
+                      onClick={() => choosePlan({amount: '2000', item_name: '1 Year' })}
+                      className="btn btn-sm btn-outline-secondary rounded-pill"
+                    >
+                      <small>Get Started</small>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <div className="col-md-5 p-5 bg-light">
-          <h5 className="font-weight-bold">Payment</h5>
-          <form className="my-4">
-            <div class="form-group">
-              <label for="exampleInputEmail1">
-                <small>credit card number</small>
-              </label>
-              <input
-                type="number"
-                className="form-control"
-                placeholder="XXXX - XXXX - XXXXX - XXXX"
-              />
+          <div className="col-md-5 p-4 bg-light">
+            <h6 className='my-2 font-weight-bold'>What You get With Our Plan</h6>
+            <div className='my-4 d-flex flex-column'>
+              <span className='my-2'>
+                <MdOutlineCheck color='#82C760' /> &nbsp; 
+                <small>Up-to-date content</small>
+              </span>
+              <span className='my-2'>
+                <MdOutlineCheck color='#82C760' /> &nbsp; 
+                <small>Ready-and-verified content uploads</small>
+              </span>
+              <span className='my-2'>
+                <MdOutlineCheck color='#82C760' /> &nbsp; 
+                <small>Unlimited Content</small>
+              </span>
+              <span className='my-2'>
+                <MdOutlineCheck color='#82C760' /> &nbsp; 
+                <small>Creative and well-developed contents</small>
+              </span>
+              <span className='my-2'>
+                <MdOutlineCheck color='#82C760' /> &nbsp; 
+                <small>100% Lifes lessons</small>
+              </span>
+              <span className='my-2'>
+                <MdOutlineCheck color='#82C760' /> &nbsp; 
+                <small>Books that covers all categories</small>
+              </span>
+              <span className='my-2'>
+                <MdOutlineCheck color='#82C760' /> &nbsp; 
+                <small>Images as part of contents</small>
+              </span>
+              <span className='my-2'>
+                <MdOutlineCheck color='#82C760' /> &nbsp; 
+                <small>Creative and well-developed contents</small>
+              </span>
+              <span className='my-2'>
+                <MdOutlineCheck color='#82C760' /> &nbsp; 
+                <small>100% Lifes lessons</small>
+              </span>
             </div>
-            <div class="form-group">
-              <label for="exampleInputEmail1">
-                <small>name (as it appears on the card)</small>
-              </label>
-              <input type="text" className="form-control" placeholder="John Doe" />
-            </div>
-            <div className="row">
-              <div className="col-md-5">
-                <div class="form-group">
-                  <label for="exampleInputEmail1">
-                    <small>CVC</small>
-                  </label>
-                  <input type="number" className="form-control" placeholder="XXX" />
-                </div>
-              </div>
-              <div className="col-md-7">
-                <label>
-                  <small>expiry date</small>
-                </label>
-                <div className="row">
-                  <div className="col-md-6 px-2">
-                    <input type="number" className="form-control" placeholder="mm" />
-                  </div>
-                  <div className="col-md-6 px-2">
-                    <input type="number" className="form-control" placeholder="yy" />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <button className="btn btn-sm btn-outline-primary btn-block mt-4 py-2">
-              Check out
-            </button>
-            <button className="btn btn-sm btn-primary btn-block mt-4 py-2">Pay with Paypal</button>
-          </form>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
 export default Billing;
+
+const RenderHTML = ({ htmlContent }) => {
+  const createMarkup = () => {
+    return { __html: `${htmlContent}` };
+  };
+
+  return (
+    <div>
+      <div
+        dangerouslySetInnerHTML={createMarkup()}
+        style={{
+          overflow: 'auto',
+          width: '90%',
+          height: 300,
+        }}
+      ></div>
+    </div>
+  );
+};
