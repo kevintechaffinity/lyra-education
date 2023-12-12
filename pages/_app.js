@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { ToastContainer } from 'react-toastify';
 import { Cloudinary } from '@cloudinary/url-gen';
 import { Inter } from '@next/font/google';
@@ -68,7 +69,10 @@ export default function App({ Component, pageProps }) {
   const { name, metadata, assets, domainName, primaryColor } = service;
 
   return (
-    <>
+    <HelmetProvider>
+      <Helmet>
+        <script src="https://www.payfast.co.za/onsite/engine.js"></script>
+      </Helmet>
       <Seo
         title={metadata.title && `${metadata.title} - ${metadata.heading}`}
         name={name}
@@ -111,7 +115,7 @@ export default function App({ Component, pageProps }) {
           )}
         </motion.div>
       </AnimatePresence>
-    </>
+    </HelmetProvider>
   );
 }
 
