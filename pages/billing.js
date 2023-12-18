@@ -12,8 +12,8 @@ const Billing = () => {
     if(result.uuid) {
       window.payfast_do_onsite_payment({
         "uuid": result.uuid,
-        "return_url": window.location.origin + "/successpay",
-        "cancel_url": window.location.origin + "/failedpay"
+        "return_url": window.location.origin + `/successpay?amount=${amount}&item=${item_name}`,
+        "cancel_url": window.location.origin + `/failedpay?amount=${amount}&item=${item_name}`
       });
     }
   };
