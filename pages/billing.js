@@ -38,14 +38,14 @@ const Billing = () => {
                       <small>
                         1 Month -{' '}
                         <span>
-                          <small className="font-weight-bold">ZAR 200</small>
+                          <small className="font-weight-bold">ZAR 1</small>
                         </span>
                       </small>
                     </h6>
                   </div>
                   <div>
                     <button
-                      onClick={() => choosePlan({amount: '200', item_name: '1 Month' })}
+                      onClick={() => choosePlan({amount: '1', item_name: '1 Month' })}
                       className="btn btn-sm btn-outline-secondary rounded-pill"
                     >
                       <small>Get Started</small>
@@ -63,14 +63,14 @@ const Billing = () => {
                       <small>
                         6 Months -{' '}
                         <span>
-                          <small className="font-weight-bold">ZAR 900</small>
+                          <small className="font-weight-bold">ZAR 1</small>
                         </span>
                       </small>
                     </h6>
                   </div>
                   <div>
                     <button 
-                      onClick={() => choosePlan({amount: '900', item_name: '6 Month' })}
+                      onClick={() => choosePlan({amount: '1', item_name: '6 Month' })}
                       className="btn btn-sm btn-outline-secondary rounded-pill"
                     >
                       <small>Get Started</small>
@@ -88,14 +88,14 @@ const Billing = () => {
                       <small>
                         1 Year -{' '}
                         <span>
-                          <small className="font-weight-bold">ZAR 2000</small>
+                          <small className="font-weight-bold">ZAR 1</small>
                         </span>
                       </small>
                     </h6>
                   </div>
                   <div>
                     <button 
-                      onClick={() => choosePlan({amount: '2000', item_name: '1 Year' })}
+                      onClick={() => choosePlan({amount: '1', item_name: '1 Year' })}
                       className="btn btn-sm btn-outline-secondary rounded-pill"
                     >
                       <small>Get Started</small>
