@@ -31,9 +31,11 @@ const Billing = () => {
               <form action="https://www.payfast.co.za/eng/process" method="post">
                 <input type="hidden" name="merchant_id" value="17844670" />
                 <input type="hidden" name="merchant_key" value="o2djg0y03gnll" />
+                <input type="hidden" name="amount" value="5" />
+                <input type="hidden" name="item_name" value="Test Product" />
                 <input type="hidden" name="subscription_type" value="1" />
                 <input type="hidden" name="billing_date" value="2020-01-01" />
-                <input type="hidden" name="recurring_amount" value="123.45" />
+                <input type="hidden" name="recurring_amount" value="5" />
                 <input type="hidden" name="frequency" value="3" />
                 <input type="hidden" name="cycles" value="12" />
                 <input type="hidden" name="subscription_notify_email" value="true" />
