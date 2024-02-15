@@ -32,9 +32,9 @@ const Billing = () => {
                 <input type="hidden" name="merchant_id" value="17844670" />
                 <input type="hidden" name="merchant_key" value="o2djg0y03gnll" />
                 <input type="hidden" name="amount" value="5" />
-                <input type="hidden" name="return_url" value="https://www.example.com/success" />
-                <input type="hidden" name="cancel_url" value="https://www.example.com/cancel" />
-                <input type="hidden" name="notify_url" value="https://www.example.com/notify" />
+                <input type="hidden" name="return_url" value="https://lyra-education-ok4t73twa-kevin-techaffinity.vercel.app/successpay" />
+                <input type="hidden" name="cancel_url" value="https://lyra-education-ok4t73twa-kevin-techaffinity.vercel.app/failedpay" />
+                <input type="hidden" name="notify_url" value="https://lyra-education-ok4t73twa-kevin-techaffinity.vercel.app/successpay" />
                 <input type="hidden" name="item_name" value="Test Product" />
                 <input type="hidden" name="subscription_type" value="1" />
                 <input type="hidden" name="billing_date" value="2020-01-01" />
@@ -87,7 +87,7 @@ const Billing = () => {
                     </h6>
                   </div>
                   <div>
-                    <button 
+                    <button
                       onClick={() => choosePlan({amount: '5', item_name: '6 Month' })}
                       className="btn btn-sm btn-outline-secondary rounded-pill"
                     >
@@ -112,7 +112,7 @@ const Billing = () => {
                     </h6>
                   </div>
                   <div>
-                    <button 
+                    <button
                       onClick={() => choosePlan({amount: '5', item_name: '1 Year' })}
                       className="btn btn-sm btn-outline-secondary rounded-pill"
                     >
@@ -127,39 +127,39 @@ const Billing = () => {
             <h6 className='my-2 font-weight-bold'>What You get With Our Plan</h6>
             <div className='my-4 d-flex flex-column'>
               <span className='my-2'>
-                <MdOutlineCheck color='#82C760' /> &nbsp; 
+                <MdOutlineCheck color='#82C760' /> &nbsp;
                 <small>Up-to-date content</small>
               </span>
               <span className='my-2'>
-                <MdOutlineCheck color='#82C760' /> &nbsp; 
+                <MdOutlineCheck color='#82C760' /> &nbsp;
                 <small>Ready-and-verified content uploads</small>
               </span>
               <span className='my-2'>
-                <MdOutlineCheck color='#82C760' /> &nbsp; 
+                <MdOutlineCheck color='#82C760' /> &nbsp;
                 <small>Unlimited Content</small>
               </span>
               <span className='my-2'>
-                <MdOutlineCheck color='#82C760' /> &nbsp; 
+                <MdOutlineCheck color='#82C760' /> &nbsp;
                 <small>Creative and well-developed contents</small>
               </span>
               <span className='my-2'>
-                <MdOutlineCheck color='#82C760' /> &nbsp; 
+                <MdOutlineCheck color='#82C760' /> &nbsp;
                 <small>100% Lifes lessons</small>
               </span>
               <span className='my-2'>
-                <MdOutlineCheck color='#82C760' /> &nbsp; 
+                <MdOutlineCheck color='#82C760' /> &nbsp;
                 <small>Books that covers all categories</small>
               </span>
               <span className='my-2'>
-                <MdOutlineCheck color='#82C760' /> &nbsp; 
+                <MdOutlineCheck color='#82C760' /> &nbsp;
                 <small>Images as part of contents</small>
               </span>
               <span className='my-2'>
-                <MdOutlineCheck color='#82C760' /> &nbsp; 
+                <MdOutlineCheck color='#82C760' /> &nbsp;
                 <small>Creative and well-developed contents</small>
               </span>
               <span className='my-2'>
-                <MdOutlineCheck color='#82C760' /> &nbsp; 
+                <MdOutlineCheck color='#82C760' /> &nbsp;
                 <small>100% Lifes lessons</small>
               </span>
             </div>
