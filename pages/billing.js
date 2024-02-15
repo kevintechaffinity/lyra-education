@@ -32,6 +32,9 @@ const Billing = () => {
                 <input type="hidden" name="merchant_id" value="17844670" />
                 <input type="hidden" name="merchant_key" value="o2djg0y03gnll" />
                 <input type="hidden" name="amount" value="5" />
+                <input type="hidden" name="return_url" value="https://www.example.com/success" />
+                <input type="hidden" name="cancel_url" value="https://www.example.com/cancel" />
+                <input type="hidden" name="notify_url" value="https://www.example.com/notify" />
                 <input type="hidden" name="item_name" value="Test Product" />
                 <input type="hidden" name="subscription_type" value="1" />
                 <input type="hidden" name="billing_date" value="2020-01-01" />
@@ -41,33 +44,33 @@ const Billing = () => {
                 <input type="hidden" name="subscription_notify_email" value="true" />
                 <input type="hidden" name="subscription_notify_webhook" value="true" />
                 <input type="hidden" name="subscription_notify_buyer" value="true" />
-                <button type="submit">Submit</button>
-              </form>
-              <div className="my-3">
-                <div className="d-flex align-items-center justify-content-between shadow p-3">
-                  <div>
-                    <span className="p-0 m-0">
-                      <small className="text-muted">Duration</small>
-                    </span>
-                    <h6 className="p-0 my-2">
-                      <small>
-                        1 Month -{' '}
-                        <span>
-                          <small className="font-weight-bold">ZAR 5</small>
-                        </span>
-                      </small>
-                    </h6>
-                  </div>
-                  <div>
-                    <button
-                      onClick={() => choosePlan({amount: '5', item_name: '1 Month' })}
-                      className="btn btn-sm btn-outline-secondary rounded-pill"
-                    >
-                      <small>Get Started</small>
-                    </button>
+                {/* <button type="submit">Submit</button> */}
+                <div className="my-3">
+                  <div className="d-flex align-items-center justify-content-between shadow p-3">
+                    <div>
+                      <span className="p-0 m-0">
+                        <small className="text-muted">Duration</small>
+                      </span>
+                      <h6 className="p-0 my-2">
+                        <small>
+                          1 Month -{' '}
+                          <span>
+                            <small className="font-weight-bold">ZAR 5</small>
+                          </span>
+                        </small>
+                      </h6>
+                    </div>
+                    <div>
+                      <button
+                        type='submit'
+                        className="btn btn-sm btn-outline-secondary rounded-pill"
+                      >
+                        <small>Get Started</small>
+                      </button>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </form>
               <div className="my-3">
                 <div className="d-flex align-items-center justify-content-between shadow p-3">
                   <div>
